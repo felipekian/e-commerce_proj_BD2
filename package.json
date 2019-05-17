@@ -1,0 +1,30 @@
+{
+  "name": "e-commerce_proj_BD2",
+  "version": "1.0.0",
+  "description": "projeto de um e-commerce em NodeJS com banco de dados poliglota com os bancos de dados MariaDB, MongoDB, Neo4j e Redis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felipekian/e-commerce_proj_BD2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felipekian/e-commerce_proj_BD2/issues"
+  },
+  "homepage": "https://github.com/felipekian/e-commerce_proj_BD2#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.16.4",
+    "express-generator": "^4.16.1",
+    "express-validator": "^5.3.1",
+    "mongodb": "^3.2.4",
+    "mongoose": "^5.5.9",
+    "multer": "^1.4.1",
+    "mysql": "^2.17.1"
+  }
+}
