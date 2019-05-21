@@ -18,9 +18,11 @@
   },
   "homepage": "https://github.com/felipekian/e-commerce_proj_BD2#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "express": "^4.16.4",
     "express-generator": "^4.16.1",
+    "express-session": "^1.16.1",
     "express-validator": "^5.3.1",
     "mongodb": "^3.2.4",
     "mongoose": "^5.5.9",
