@@ -18,7 +18,7 @@ router.get('/cadastrar_cliente', (req, res, next) => {
 })
 
 router.get('/recuperar_login_cliente', (req, res, next) => {
-    res.render('./loja_clientes/recuperar_login_cliente');
+    res.render('./loja_clientes/recuperar_login_cliente',{msg:"", dados : {}});
 })
 
 router.get('/comparar_produtos', (req, res, next) => {
@@ -40,10 +40,62 @@ router.post('/cadastrarCliente', (req, res, next) => {
     
         connectionMDB.query(sql, req.body, function(error, result){
 
-            if(!error)
+            if(!error){
                 res.render("./loja_clientes/login", {msg:"Cadastrado com sucesso, agora faça seu login."})
-            else
+                return            
+            } else {
                 res.render("./loja_clientes/cadastro_clientes", {msg : "Usuário já possui cadastrado!"})
+                return
+            }
+        })
+})
+
+router.post('/recuperarCadastro', (req, res, next) => {
+
+    console.log(req.body)
+    
+    let user = req.body.usuario
+    let name = req.body.nomecompleto;
+    let rg = req.body.rg;
+    let cpf = req.body.cpf;
+    let novaSenha = req.body.senha;
+
+    
+    const sql = "SELECT * FROM clientes where usuario='"+user+"'";
+    
+        connectionMDB.query(sql, function(error, results){
+
+            if(!error && results.length > 0)
+            {
+                console.log("Não deu erro")
+
+                
+                if( name==results[0].nomecompleto && rg==results[0].rg && cpf==results[0].cpf && user==results[0].usuario){
+
+                        console.log("Entrei para atualizar")
+
+                        const sql_atualizar = "UPDATE clientes SET senha= '"+novaSenha+"' where usuario = '"+user+"'";
+                      
+                        
+                        connectionMDB.query(sql_atualizar, function(error, result){
+                            if(!error) {
+                                res.render("./loja_clientes/login", {msg : "Atualizado com sucesso!"})
+                                
+                            } else {
+                                res.render("./loja_clientes/recuperar_login_cliente", {msg : "Erro ao atualizar senha!", dados : req.body})
+                                
+                            }                            
+                        })                
+                } else {
+                    res.render("./loja_clientes/recuperar_login_cliente", {msg : "Os dados não conferem!", dados : req.body})
+                                       
+                }
+
+            }else{
+                
+                console.log("Deu ruim no usuario")
+                res.render("./loja_clientes/recuperar_login_cliente", {msg : "Usuário não cadastrado no sistema!", dados : req.body})
+            }
         })
 })
 

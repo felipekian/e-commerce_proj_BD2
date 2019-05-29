@@ -87,33 +87,40 @@
             <h3 class="centro">Recuperar minha conta</h3>
             <br>
 
-            <form action="" method="post">
+            <form action="/recuperarCadastro" method="post">
                 
-                <h6 class="text-success centro">Para recuperar sua senha precisamos de todos os seus dados para sua maior segurança!</h6>
+                <% if(msg) {%>
+
+                    <h3 class="text-danger centro"><%= msg %></h3>
+                
+                <% } else { %>
+                    <h6 class="text-success centro">Para recuperar sua senha precisamos de todos os seus dados para sua maior segurança!</h6>
+                
+                <% } %>
                 <br>
                 <div class="form-group">
-                    <label for="nome">Nome completo</label>
-                    <input type="text" name="nome" id="nome" class="form-control" placeholder="Ex.: maria da silva" required autofocus>
+                    <label for="nomecompleto">Nome completo</label>
+                    <input type="text" name="nomecompleto" value="<%= dados.nomecompleto %>" id="nomecompleto" class="form-control" placeholder="Ex.: maria da silva" required autofocus>
                 </div>
                 <div class="form-group">
                     <label for="rg">RG</label>
-                    <input type="text" name="rg" id="rg" class="form-control" placeholder="Ex.: 123456789" required>
+                    <input type="text" name="rg" value="<%= dados.rg %>" id="rg" class="form-control" placeholder="Ex.: 123456789" required>
                 </div>
                 <div class="form-group">
                     <label for="cpf">CPF</label>
-                    <input type="text" name="cpf" id="cpf" class="form-control" placeholder="Ex.: 123456789" required>
+                    <input type="text" name="cpf" id="cpf" value="<%= dados.cpf %>" class="form-control" placeholder="Ex.: 123456789" required>
                 </div>
                 <div class="form-group">
-                    <label for="">Email</label>
-                    <input type="email" name="" id="" class="form-control" placeholder="Ex.: maria@you.com" required>
+                    <label for="email0">Email</label>
+                    <input type="email" name="email" id="email" value="<%= dados.email %>" class="form-control" placeholder="Ex.: maria@you.com" required>
                 </div>            
                 <div class="form-group">
                     <label for="usuario">Usuário</label>
-                    <input type="text" name="usuario" id="usuario" class="form-control"  placeholder="Ex.: maria" required>
+                    <input type="text" name="usuario" id="usuario" value="<%= dados.usuario %>" class="form-control"  placeholder="Ex.: maria" required>
                 </div>
                 <div class="form-group">
                     <label for="senha">Nova senha</label>
-                    <input type="password" name="senha" id="senha" class="form-control" placeholder="Ex.: 123456789"  required>
+                    <input type="password" name="senha" id="senha" value="<%= dados.senha %>" class="form-control" placeholder="Ex.: 123456789"  required>
                 </div>
                 <br>
                 <div class="form-group">                
