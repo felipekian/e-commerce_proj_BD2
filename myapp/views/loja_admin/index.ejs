@@ -32,36 +32,49 @@
     <header>
         <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">            
             <a class="navbar-brand" href="/admin"><img src="/images/bootstrap-solid.svg" width="30" height="30" alt=""> Zetta-Byte</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
-              <span class="navbar-toggler-icon"></span>
-            </button>
+            
         </nav>
     </header>
     <main>
+        <div class="container col-sm-1 col-xs-4 col-md-3"></div>
 
-        <div class="container">
+        <% if(msg) { %>
+            <br>
+            <h5 class="centro text-success"><%= msg%></h5>
+        <% } %>
+
+        <div class="container col-sm-10 col-xs-4 col-md-6">
+            <div>
+                <br>
+                <h3 class="centro">Login de funcionário</h3>
+                <br>
+            </div>
+
             <form action="" method="">
                 <div class="form-group">
                     <label for="usuario">Usuário</label>
-                    <input type="text" name="usuario" id="usuario" class="form-control">
+                    <input type="text" name="usuario" id="usuario" class="form-control" autofocus required>
                 </div>
                 <div class="form-group">
                     <label for="senha">Senha</label>
-                    <input type="password" class="form-control" id="senha" name="senha">
+                    <input type="password" class="form-control" id="senha" name="senha" required>
                 </div>
+                <br>
                 <div class="form-group">
-                    <input type="submit" value="enviar" class="btn btn-primary">
-                </div>    
+                    <input type="submit" value="Logar" class="btn btn-primary">
+                </div>
+                <br>    
             </form>
 
             <div class="container">
                 <ul>
                     <li>Não tenho conta: <a href="/admin/admincadastro">Cadastre-se</a></li>
-                    <li>Esquice minha conta: <a href="/admin/adminrecuperar">Recuperar cadastro</a></li>
+                    <li>Esquice minha conta: <a href="/admin/adminrecuperar">Recuperar conta</a></li>
                 </ul>
             </div>
-
+            <br>
         </div>
+        <div class="container col-sm-1 col-xs-4 col-md-3"></div>
     </main>
     <footer class="page-footer font-small teal pt-4 bg-dark">
 

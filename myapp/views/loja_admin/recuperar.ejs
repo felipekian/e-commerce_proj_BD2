@@ -39,39 +39,47 @@
     </header>
     <main>
 
-            <div class="container">
-                    <div class="form-group">
-                        <h3>Recuperar conta</h3>
+        <div class="container col-sm-1 col-xs-4 col-md-3"></div>
+        
+        <% if(msg) { %>
+            <br>
+            <h5 class="centro text-danger"><%= msg %></h5>
+        <% } %>
+
+        <div class="container col-sm-10 col-xs-4 col-md-6">
+                    <div>
+                        <br>
+                        <h3 class="centro">Recuperar conta</h3>
                     </div>
-                    <form action="" method="">        
+                    <form action="/admin/recuperarConta" method="post">        
                         <!--dados Pessoais-->
                         
                         <div class="form-group">
                             <label for="rg">RG</label>
-                            <input type="text" name="rg" id="rg" class="form-control" required>
+                            <input type="text" name="rg" id="rg" class="form-control"   value="<%= dados.rg %>" required>
                         </div>
                         <div class="form-group">
                             <label for="cpf">CPF</label>
-                            <input type="text" name="cpf" id="cpf" class="form-control" required>
+                            <input type="text" name="cpf" id="cpf" class="form-control" value="<%= dados.cpf %>" required>
                         </div>
                         <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" name="email" id="email" class="form-control" required>
+                                <input type="email" name="email" id="email" class="form-control" value="<%= dados.email %>" required>
                         </div>
                         <div class="form-group">
                             <label for="usuario">Usuário</label>
-                            <input type="text" name="usuario" id="usuario" class="form-control" required>
+                            <input type="text" name="usuario" id="usuario" class="form-control" value="<%= dados.usuario %>" required>
                         </div>
                         <div class="form-group">
                             <label for="senha">Nova Senha</label>
-                            <input type="password" class="form-control" id="senha" name="senha" required>
+                            <input type="password" class="form-control" id="senha" name="senha" value="<%= dados.senha %>" required>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="enviar" class="btn btn-primary">
+                            <input type="submit" value="Recuperar" class="btn btn-primary">
                         </div>    
                     </form>
                 </div>
-
+            <div class="container col-sm-1 col-xs-4 col-md-3"></div>
     </main>
     <footer class="page-footer font-small teal pt-4 bg-dark">
 

@@ -6,7 +6,7 @@ var connectionMDB = conexaoMDB()
 
 /* GET's. */
 router.get('/', function(req, res, next) {
-  res.render('./loja_clientes/index');
+  res.render('./loja_clientes/index', {msg:""});
 });
 
 router.get('/login', (req, res, next) => {
@@ -38,16 +38,16 @@ router.post('/cadastrarCliente', (req, res, next) => {
     
     const sql = "insert into clientes set ?"
     
-        connectionMDB.query(sql, req.body, function(error, result){
+    connectionMDB.query(sql, req.body, function(error, result){
 
-            if(!error){
-                res.render("./loja_clientes/login", {msg:"Cadastrado com sucesso, agora faça seu login."})
-                return            
-            } else {
-                res.render("./loja_clientes/cadastro_clientes", {msg : "Usuário já possui cadastrado!"})
-                return
-            }
-        })
+        if(!error){
+            res.render("./loja_clientes/login", {msg:"Cadastrado com sucesso, agora faça seu login."})
+            return            
+        } else {
+            res.render("./loja_clientes/cadastro_clientes", {msg : "Usuário já possui cadastrado!"})
+            return
+        }
+    })
 })
 
 router.post('/recuperarCadastro', (req, res, next) => {
