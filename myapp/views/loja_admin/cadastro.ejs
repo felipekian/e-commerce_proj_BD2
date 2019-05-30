@@ -35,6 +35,13 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
               <span class="navbar-toggler-icon"></span>
             </button>
+            <ul>
+                <li class="nav-item">
+                    <% if(msg != "") {%>
+                        <a class="nav-link text-success" href="/logout">Logout - <%= msg %></a>
+                    <% } %>                        
+                </li>
+            </ul>
         </nav>
     </header>
     <main>

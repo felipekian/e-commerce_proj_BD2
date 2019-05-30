@@ -66,9 +66,13 @@
               <li class="nav-item">
                   <a class="nav-link" href="/carrinho">Carrinho</a>
               </li>
-              <li class="nav-item active">
-                <a class="nav-link " href="/login">Login<span class="sr-only">(página atual)</span></a>
-              </li>
+              <li class="nav-item">
+                    <% if(msg != "") {%>
+                        <a class="nav-link text-success" href="/logout">Logout - <%= msg %></a>
+                    <% } else {%>
+                        <a class="nav-link" href="/login">Login</a>
+                    <% } %>
+                </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
@@ -79,26 +83,41 @@
     </header>
     <main>
 
-        <div class="container col-sm-1 col-xs-4 col-md-3"></div>
-    
-        <div class="container col-sm-10 col-xs-4 col-md-6">
+        <div class="container col-sm-1  col-md-2 col-lg-3 col-xs-4"></div>
+        
+        <div class="container col-sm-10  col-md-8 col-lg-6 col-xs-4">
             
-            <% if(msg) {%>
-                <br>
-                <h3 class="centro text-success"><%= msg %></h3>
-            <% } %>
             
-            <form action="" method="post" class="">
+            
+            <form action="/validarUsuario" method="post">
                 <br>
                 <h1 class="centro">Login</h1>
                 <br>
+                <% if(msg == "Dados não conferem, tente de novo!" || msg =="Erro de validação:") {%>
+                   
+                    <h3 class="centro text-danger"><%= msg %></h3>
+                <% } else {%>
+                    
+                    <h3 class="centro text-success"><%= msg %></h3>
+                <% } %>
+    
+                <% if(erros){ %>                
+                    <div class="container">
+                        <ul class="list-group ">
+                        <% for(let i=0 ; i<erros.length; i++){ %>
+                            <li class="text_danger list-group-item list-group-item-action list-group-item-danger"><%= erros[i].msg %></li>
+                        <% } %>
+                        </ul>
+                    </div>                
+                <% } %>
+                <br>
                 <div class="form-group">
                     <label for="usuario">usuário</label>
-                    <input type="text" name="usuario" id="usuario" class="form-control" required autofocus>
+                    <input type="text" name="usuario" id="usuario" class="form-control" value="<%= dados.usuario %>" required autofocus>
                 </div>
                 <div class="form-group">
                     <label for="senha">Senha</label>
-                    <input type="password" name="senha" id="senha" class="form-control" required>
+                    <input type="password" name="senha" id="senha" class="form-control" value="<%= dados.senha %>" required>
                 </div> 
                 <br>       
                 <div class="form-group">
@@ -118,8 +137,9 @@
             </form>
     
         </div>
-        <div class="container col-sm-1 col-xs-4 col-md-3"></div>
+        <div class="container col-sm-1  col-md-2 col-lg-3 col-xs-4"></div>
         <br>
+
     </main>
     <!-- Footer -->
     <footer class="page-footer font-small teal pt-4 bg-dark">

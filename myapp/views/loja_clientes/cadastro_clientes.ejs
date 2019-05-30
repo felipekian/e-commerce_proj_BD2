@@ -66,9 +66,13 @@
               <li class="nav-item">
                   <a class="nav-link" href="/carrinho">Carrinho</a>
               </li>
-              <li class="nav-item active">
-                <a class="nav-link " href="/login">Login</a>
-              </li>
+              <li class="nav-item">
+                    <% if(msg != "") {%>
+                        <a class="nav-link text-success" href="/logout">Logout - <%= msg %></a>
+                    <% } else {%>
+                        <a class="nav-link" href="/login">Login</a>
+                    <% } %>
+                </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
@@ -79,62 +83,75 @@
     </header>
     <main>
 
-        <div class="container col-sm-1 col-xs-4 col-md-3"></div>
+        <div class="container col-sm-1  col-md-2 col-lg-3 col-xs-4"></div>
         
-        <div class="container col-sm-10 col-xs-4 col-md-6">
-            
-            <% if(msg) {%>
-                <br>
-                <h3 class="centro text-danger"><%= msg %></h3>
-            <% } %>
+        <div class="container col-sm-10  col-md-8 col-lg-6 col-xs-4">
 
             <form action="/cadastrarCliente" method="post">
                 
                 <br>
                 <h1 class="centro">Cadastro de Cliente</h1>
+                
+
+                <% if(msg) {%>
+                    <br>
+                    <h3 class="centro text-danger"><%= msg %></h3>
+                <% } %>
+    
+                <% if(erros){ %>                
+                    <div class="container">
+                        <ul class="list-group ">
+                        <% for(let i=0 ; i<erros.length; i++){ %>
+                            <li class="text_danger list-group-item list-group-item-action list-group-item-danger"><%= erros[i].msg %></li>
+                        <% } %>
+                        </ul>
+                    </div>
+                    
+                <% } %>
+
                 <br>
 
                 <div class="form-group">
                     <label for="nomecompleto">Nome completo</label>
-                    <input type="text" name="nomecompleto" id="nomecompleto" class="form-control" placeholder="Seu nome" required autofocus>
+                    <input type="text" name="nomecompleto" id="nomecompleto" class="form-control" placeholder="Seu nome" value="<%= dados.nomecompleto %>" required autofocus>
                 </div>
                 <div class="form-group">
                     <label for="rg">RG</label>
-                    <input type="text" name="rg" id="rg" class="form-control" placeholder="Seu RG" required>
+                    <input type="text" name="rg" id="rg" class="form-control" placeholder="Seu RG" value="<%= dados.rg %>"  required>
                 </div>
                 <div class="form-group">
                     <label for="cpf">CPF</label>
-                    <input type="text" name="cpf" id="cpf" class="form-control" placeholder="Seu CPF" required>
+                    <input type="text" name="cpf" id="cpf" class="form-control" placeholder="Seu CPF" value="<%= dados.cpf %>" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Seu email" required>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="Seu email"  value="<%= dados.email %>" required>
                 </div>
                 <br><br>
                 <div class="form-group">
                     <label for="endereco">Endereço completo</label>
-                    <input type="text" name="endereco" id="endereco" class="form-control" placeholder="Seu endereço" required>
+                    <input type="text" name="endereco" id="endereco" class="form-control" placeholder="Seu endereço" value="<%= dados.endereco %>" required>
                 </div>
                 <div class="form-group">
                     <label for="estado">Estado</label>
-                    <input type="text" name="estado" id="estado" class="form-control" placeholder="Seu estado" required>
+                    <input type="text" name="estado" id="estado" class="form-control" placeholder="Seu estado" value="<%= dados.estado %>" required>
                 </div>
                 <div class="form-group">
                     <label for="cidade">Cidade</label>
-                    <input type="text" name="cidade" id="cidade" class="form-control" placeholder="Sua cidade" required>
+                    <input type="text" name="cidade" id="cidade" class="form-control" placeholder="Sua cidade" value="<%= dados.cidade %>" required>
                 </div>
                 <div>
                     <label for="cep">CEP</label>
-                    <input type="text" name="cep" id="cep" class="form-control" placeholder="Seu CEP" required>
+                    <input type="text" name="cep" id="cep" class="form-control" placeholder="Seu CEP" value="<%= dados.cep %>" required>
                 </div>
                 <br><br>
                 <div class="form-group">
                     <label for="usuario">Usuário</label>
-                    <input type="text" name="usuario" id="usuario" class="form-control"  placeholder="Usuário do sistema" required>
+                    <input type="text" name="usuario" id="usuario" class="form-control"  placeholder="Usuário do sistema" value="<%= dados.usuario %>" required>
                 </div>
                 <div class="form-group">
                     <label for="senha">Senha</label>
-                    <input type="password" name="senha" id="senha" class="form-control" placeholder="Senha de acesso"  required>
+                    <input type="password" name="senha" id="senha" class="form-control" placeholder="Senha de acesso" value="<%= dados.senha %>"  required>
                 </div>
                 <br>
                 <div class="form-group">                
@@ -144,7 +161,7 @@
             </form>
         </div>
         
-        <div class="container col-sm-1 col-xs-4 col-md-3"></div>
+        <div class="container col-sm-1  col-md-2 col-lg-3 col-xs-4"></div>
         
 
     </main>

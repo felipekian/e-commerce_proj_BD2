@@ -39,18 +39,23 @@
           
           <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="/admin/home">Home <span class="sr-only">(página atual)</span></a>
-              </li>              
-              <li class="nav-item">
-                  <a class="nav-link" href="/admin/cadastro_produto">Cadastrar Produto</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/admin/clientes">Clientes</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/admin/chat">Chat-Clientes</a>
-              </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/admin/home">Home <span class="sr-only">(página atual)</span></a>
+                </li>              
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/cadastro_produto">Cadastrar Produto</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/clientes">Clientes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/chat">Chat-Clientes</a>
+                </li>
+                <li class="nav-item">
+                    <% if(msg != "") {%>
+                        <a class="nav-link text-success" href="/logout">Logout - <%= msg %></a>
+                    <% } %>                        
+                </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">

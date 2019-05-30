@@ -60,15 +60,19 @@
                   </div>
                   <!-- fim da lista -->
                 </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/comparar_produtos">Comparar</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/carrinho">Carrinho</a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link " href="/login">Login</a>
-              </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/comparar_produtos">Comparar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/carrinho">Carrinho</a>
+                </li>
+                <li class="nav-item">
+                    <% if(msg != "") {%>
+                        <a class="nav-link text-success" href="/logout">Logout - <%= msg %></a>
+                    <% } else {%>
+                        <a class="nav-link" href="/login">Login</a>
+                    <% } %>
+                </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
@@ -79,9 +83,9 @@
     </header>
     <main>
         
-        <div class="container col-sm-1 col-xs-4 col-md-3"></div>
+        <div class="container col-sm-1  col-md-2 col-lg-3 col-xs-4"></div>
     
-        <div class="container col-sm-10 col-xs-4 col-md-6">
+        <div class="container col-sm-10  col-md-8 col-lg-6 col-xs-4">
             
             <br>
             <h3 class="centro">Recuperar minha conta</h3>
@@ -89,14 +93,26 @@
 
             <form action="/recuperarCadastro" method="post">
                 
-                <% if(msg) {%>
-
-                    <h3 class="text-danger centro"><%= msg %></h3>
                 
+                <% if(msg) {%>
+                    
+                    <h3 class="centro text-danger"><%= msg %></h3>
                 <% } else { %>
                     <h6 class="text-success centro">Para recuperar sua senha precisamos de todos os seus dados para sua maior segurança!</h6>
                 
                 <% } %>
+    
+                <% if(erros){ %>                
+                    <div class="container">
+                        <ul class="list-group ">
+                        <% for(let i=0 ; i<erros.length; i++){ %>
+                            <li class="text_danger list-group-item list-group-item-action list-group-item-danger"><%= erros[i].msg %></li>
+                        <% } %>
+                        </ul>
+                    </div>
+                    <br>
+                <% } %>
+
                 <br>
                 <div class="form-group">
                     <label for="nomecompleto">Nome completo</label>
@@ -130,8 +146,9 @@
             </form>
         </div>
 
-        <div class="container col-sm-1 col-xs-4 col-md-3"></div>
+        <div class="container col-sm-1  col-md-2 col-lg-3 col-xs-4"></div>
         <br>
+        
     </main>
     <!-- Footer -->
     <footer class="page-footer font-small teal pt-4 bg-dark">

@@ -6,7 +6,10 @@ var connectionMDB = conexaoMDB()
 
 /* GET's */
 router.get('/', function(req, res, next) {
-  res.render('./loja_admin/index', {msg:""});
+    if(req.session["usuario"])
+        res.redirect('/admin/home', {msg:req.session["usuario"]});
+    else
+        res.render('./loja_admin/index', {msg:""});
 });
 
 router.get('/admincadastro', function(req, res, next) {
@@ -18,19 +21,19 @@ router.get('/adminrecuperar', function(req, res, next) {
 });
 
 router.get('/home', function(req, res, next) {
-    res.render('./loja_admin/home');
+    res.render('./loja_admin/home',{msg:""});
 });
 
 router.get('/cadastro_produto', function(req, res, next) {
-    res.render('./loja_admin/cadastro_produtos');
+    res.render('./loja_admin/cadastro_produtos',{msg:""});
 });
 
 router.get('/clientes', function(req, res, next) {
-    res.render('./loja_admin/clientes');
+    res.render('./loja_admin/clientes',{msg:""});
 });
 
 router.get('/chat', function(req, res, next) {
-    res.render('./loja_admin/chat_cliente');
+    res.render('./loja_admin/chat_cliente',{msg:""});
 });
 
 
@@ -99,6 +102,12 @@ router.post("/recuperarConta", function(req, res, next){
                 res.render("./loja_admin/recuperar", {msg : "Usuário não cadastrado no sistema!", dados : req.body})
             }
         })
+})
+
+router.post("/admin/cadastrarProduto", (req, res, next) => {
+    console.log(req.body)
+
+    res.send("OK");
 })
 
 /* PUT's */
