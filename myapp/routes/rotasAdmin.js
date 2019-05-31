@@ -37,10 +37,33 @@ router.get('/cadastro_produto', function(req, res, next) {
 
 router.get('/clientes', function(req, res, next) {
     if(req.session["usuario"])
-        res.render('./loja_admin/clientes',{msg:req.session["usuario"],erros:{},dados:{}});
+    {
+        console.log("\n\nENTREI\n\n")
+        //recuperar os dados do banco
+        let sql = "SELECT * FROM clientes LIMIT 100";
+
+        connectionMDB.query(sql, function(error, result){
+            console.log("\n\nERRORS: "+ error)
+            if(!error && result[0] != undefined)
+            {
+                console.log("\n\nDEU BOM LISTAR")
+                res.render('./loja_admin/clientes',{msg:req.session["usuario"],erros:{},dados:result});
+                return
+            } 
+            else 
+            {
+                console.log("\n\nDEU RUIM LISTAR")
+                res.render('./loja_admin/clientes',{msg:req.session["usuario"],erros:{},dados:{}});
+                return
+            }
+        })
+    }
     else
+    {
+        console.log("SESSAO NAO CRIADA")
         res.render('./loja_admin/index', {msg:"", erros:{}, dados:{}});
-});
+    }
+    });
 
 
 router.get('/chat', function(req, res, next) {
@@ -218,6 +241,8 @@ router.post('/validarLogin', (req, res, next) => {
     })
 
 })
+
+
 
 /* PUT's */
 
