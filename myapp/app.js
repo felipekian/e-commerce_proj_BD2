@@ -7,6 +7,8 @@ var logger = require('morgan');
 var expressvalidator = require('express-validator');
 const session = require('express-session');
 
+
+
 var rotasAdmin = require('./routes/rotasAdmin');
 var rotasLoja = require('./routes/rotasLoja');
 

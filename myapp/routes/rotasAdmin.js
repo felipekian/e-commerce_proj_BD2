@@ -1,9 +1,24 @@
 var express = require('express');
 var router = express.Router();
 const conexaoMDB = require('../config/con_mariaDB');
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
 const crypto = require("crypto");
+const path = require('path');
 
-var connectionMDB = conexaoMDB()
+var connectionMDB = conexaoMDB();
+
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, `${Date.now()}-${file.originalname}`);
+    }
+});
+const upload = multer({ storage });
+
 
 /* GET's */
 router.get('/', function(req, res, next) {
@@ -123,7 +138,7 @@ router.post("/cadastrarFuncionario", function(req, res, next){
         } else {
             req.body.senha = senhaAntiga;
             console.log("DEU RUIM")
-            res.render("./loja_admin/cadastro", {msg : "Funcionário já possui cadastrado!", dados:req.body, erros:{}})            
+            res.render("./loja_admin/cadastro", {msg : "Funcionário já cadastrado!", dados:req.body, erros:{}})            
         }
     })
 })
@@ -242,7 +257,44 @@ router.post('/validarLogin', (req, res, next) => {
 
 })
 
+router.post('/cadastrarProduto',upload.single('file'), (req, res, next) => {
+    
+    // validar formulário
+    req.assert("nomeproduto", "Nome do produto precisa ser informado.").notEmpty();
+    req.assert("preco", "Preço precisa ser numérico").isInt();
+    req.assert("preco", "Preço não pode ser vazio").notEmpty();
+    req.assert("descricao", "Descrição precisa ser informada").notEmpty();
+        
+    let erros = req.validationErrors();
 
+    if(erros){
+        console.log(erros)
+        res.render("./loja_admin/cadastro_produtos", {msg:"Erro de validação:", erros:erros, dados:req.body})
+        return
+    }
+    
+    //recuperando o path da imagem para colocar no req.body para ser cadastrado
+    const localImg = req.file.path;
+    req.body.img = localImg;
+
+    console.log(req.body)
+
+    //cadastrar no banco
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("zettaByte");        
+        dbo.collection("produtos").insert(req.body, function(err, result) {
+            if (!err) {            
+                res.render("./loja_admin/cadastro_produtos", {msg:"Cadastrado com sucesso!", dados:{}, erros:{}})
+                db.close();
+                return
+            } 
+            else {
+                res.render("./loja_admin/cadastro_produtos", {msg:"Falha ao cadastrar!", dados:req.body, erros:{}})
+            }
+        });
+    });
+})
 
 /* PUT's */
 

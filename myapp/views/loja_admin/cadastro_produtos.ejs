@@ -77,13 +77,33 @@
                     <br>
                 </div>
 
+                <div>
+                    <!-- Erros -->
+                    <% if(msg=='Erro de validação:'){ %>
+                        <h3 class="centro text-danger"><%= msg %></h3>
+                        <br>
+                        <div class="container">
+                            <ul class="list-group ">
+                            <% for(let i=0 ; i<erros.length; i++){ %>
+                                <li class="text_danger list-group-item list-group-item-action list-group-item-danger"><%= erros[i].msg %></li>
+                            <% } %>
+                            </ul>
+                        </div>
+                        <br>
+                    <% } else if(msg=="Cadastrado com sucesso!"){ %>
+                        <h3 class="centro text-success"> <%= msg %> </h3>
+                    <% } else if(msg=="Falha ao cadastrar!") {%>
+                        <h3 class="centro text-warning"> msg; </h3>
+                    <% } %>
+                </div>
+
                 <div class="form-group">
-                    <label for="nomeProd">Nome do produto</label>
-                    <input type="text" class="form-control" name="nomeProd" id="nomeProd"  required autofocus>
+                    <label for="nomeproduto">Nome do produto</label>
+                    <input type="text" class="form-control" name="nomeproduto" id="nomeproduto"   value="<%= dados.nomeproduto %>" required autofocus>
                 </div>
                 <div class="form-group">
                     <label for="tipo">Tipo</label>
-                    <select type="text" class="form-control" name="tipo" id="tipo" required>
+                    <select type="text" class="form-control" name="tipo" id="tipo" value="<%= dados.tipo %>" required>
                         <option value="gabinete">Gabinete</option>
                         <option value="monitore">Monitore</option>
                         <option value="mouse">Mouse</option>
@@ -99,16 +119,17 @@
                 </div>
                 <div class="form-group">
                     <label for="preco">Preço</label>
-                    <input type="number" class="form-control" name="preco" id="preco" required>
+                    <input type="number" class="form-control" name="preco" id="preco" value="<%= dados.preco %>" min="0" required>
                 </div>
                 <div class="form-group">
                     <label for="descricao">Descrição</label>
-                    <textarea name="descricao" class="form-control" id="descricao" cols="20" rows="7" required></textarea>
+                    <textarea name="descricao" class="form-control" id="descricao" cols="20" rows="7" value="<%= dados.descricao %>" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="foto">Foto do Produto</label>
-                    <input type="file" class="form-control" name="foto" id="foto" required>
+                    <label for="file">Foto do Produto</label>
+                    <input type="file" class="form-control" name="file" id="file" required>
                 </div>
+                <input type="hidden" name="img" value="">
                 <br>
                 <div class="form-group">                    
                     <input type="submit" class="btn btn-primary" value="Cadastrar">
