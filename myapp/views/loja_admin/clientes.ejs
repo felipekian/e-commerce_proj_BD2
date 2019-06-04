@@ -45,20 +45,25 @@
               <li class="nav-item">
                   <a class="nav-link" href="/admin/cadastro_produto">Cadastrar Produto</a>
               </li>
-              <li class="nav-item active">
-                  <a class="nav-link" href="/admin/clientes">Clientes</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/admin/chat">Chat-Clientes</a>
-              </li>
-              <li class="nav-item">
-                    <% if(msg != "") {%>
-                        <a class="nav-link text-success" href="/admin/logout">Logout - <%= msg %></a>
-                    <% } %>                        
-                </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/admin/produtos">Produto</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/admin/clientes">Clientes</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/admin/chat">Chat-Clientes</a>
+            </li>
+            
+            <li class="nav-item">
+                <% if(msg != "") {%>
+                    <a class="nav-link text-success" href="/admin/logout">Logout - <%= msg %></a>
+                <% } %>                        
+            </li>
+            
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+            <form class="form-inline my-2 my-lg-0" method="GET" action="">
+              <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar Cliente" aria-label="Pesquisar">
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
             </form>
           </div>
@@ -106,49 +111,41 @@
         <br>
     </main>
     <!-- Footer -->
-    <footer class="page-footer font-small teal pt-4 bg-dark">
+    <footer id="footer" class="page-footer font-small teal pt-4 bg-dark fixar-rodape">
 
-        <!-- Footer Text -->
-        <div class="container-fluid text-center text-md-left">
-      
-          <!-- Grid row -->
-          <div class="row">
-      
-            <!-- Grid column -->
-            <div class="col-md-6 mt-md-0 mt-3">
-      
-              <!-- Content -->
-              <h5 class="text-uppercase font-weight-bold white">Qualidade</h5>
-              <p class="white">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-      
+            <!-- Footer Text -->
+            <div class="container-fluid text-center text-md-left">
+            
+                <!-- Grid row -->
+                <div class="row">
+            
+                <!-- Grid column -->
+                <div class="col-md-6 mt-md-0 mt-3">
+            
+                    <!-- Content -->
+                    <h5 class="text-uppercase font-weight-bold white">Qualidade</h5>
+                    <p class="white">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+            
+                </div>
+                <!-- Grid column -->
+            
+                <hr class="clearfix w-100 d-md-none pb-3">
+            
+                <!-- Grid column -->
+                <div class="col-md-6 mb-md-0 mb-3">
+            
+                    <!-- Content -->
+                    <h5 class="text-uppercase font-weight-bold white">Satisfação</h5>
+                    <p class="white">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+            
+                </div>
+                <!-- Grid column -->
+            
+                </div>
+                <!-- Grid row -->
+            
             </div>
-            <!-- Grid column -->
-      
-            <hr class="clearfix w-100 d-md-none pb-3">
-      
-            <!-- Grid column -->
-            <div class="col-md-6 mb-md-0 mb-3">
-      
-              <!-- Content -->
-              <h5 class="text-uppercase font-weight-bold white">Satisfação</h5>
-              <p class="white">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-      
-            </div>
-            <!-- Grid column -->
-      
-          </div>
-          <!-- Grid row -->
-      
-        </div>
-        <!-- Footer Text -->
-      
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3 white">© 2018 Copyright:
-          <a href="https://mdbootstrap.com/education/bootstrap/" class="white"> MDBootstrap.com</a>
-        </div>
-        <!-- Copyright -->
-      
-      </footer>
-      <!-- Footer -->
+            <!-- Footer Text -->
+        </footer>
   </body>
 </html>

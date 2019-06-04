@@ -46,6 +46,9 @@
                     <a class="nav-link" href="/admin/cadastro_produto">Cadastrar Produto</a>
                 </li>
                 <li class="nav-item">
+                        <a class="nav-link" href="/admin/produtos">Produto</a>
+                    </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/admin/clientes">Clientes</a>
                 </li>
                 <li class="nav-item">
@@ -57,10 +60,7 @@
                     <% } %>                        
                 </li>                
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-            </form>
+            
           </div>
       </nav>
     </header>
@@ -73,7 +73,7 @@
 
                 <div>
                     <br>
-                    <h3 class="centro">Cadastro de predutos</h3>
+                    <h3 class="centro">Cadastro de Produtos</h3>
                     <br>
                 </div>
 
@@ -102,16 +102,22 @@
                     <input type="text" class="form-control" name="nomeproduto" id="nomeproduto"   value="<%= dados.nomeproduto %>" required autofocus>
                 </div>
                 <div class="form-group">
+                    <label for="fabricante">Fabricante</label>
+                    <input type="text" class="form-control" name="fabricante" id="fabricante"   value="<%= dados.fabricante %>" required>
+                </div>
+                <div class="form-group">
                     <label for="tipo">Tipo</label>
                     <select type="text" class="form-control" name="tipo" id="tipo" value="<%= dados.tipo %>" required>
                         <option value="gabinete">Gabinete</option>
-                        <option value="monitore">Monitore</option>
+                        <option value="monitor">Monitor</option>
                         <option value="mouse">Mouse</option>
                         <option value="teclado">Teclado</option>
+                        <option value="cooler">Cooler</option>
                         <option value="hd">HD</option>
                         <option value="ssd">SSD</option>
                         <option value="processador">Precessador</option>
                         <option value="placamae">Placa Mãe</option>
+                        <option value="Memoria">Memória</option>
                         <option value="placavideo">Placa de Vídeo</option>
                         <option value="headset">Headset</option>
 
@@ -120,6 +126,10 @@
                 <div class="form-group">
                     <label for="preco">Preço</label>
                     <input type="number" class="form-control" name="preco" id="preco" value="<%= dados.preco %>" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="quantidade">Quantidade</label>
+                    <input type="number" class="form-control" name="quantidade" id="quantidade" value="<%= dados.quantidade %>" min="1" required>
                 </div>
                 <div class="form-group">
                     <label for="descricao">Descrição</label>
@@ -141,50 +151,42 @@
     
     <br>
     </main>
-    <!-- Footer -->
-    <footer class="page-footer font-small teal pt-4 bg-dark">
+<!-- Footer -->
+<footer id="footer" class="page-footer font-small teal pt-4 bg-dark">
 
         <!-- Footer Text -->
         <div class="container-fluid text-center text-md-left">
-      
-          <!-- Grid row -->
-          <div class="row">
-      
+        
+            <!-- Grid row -->
+            <div class="row">
+        
             <!-- Grid column -->
             <div class="col-md-6 mt-md-0 mt-3">
-      
-              <!-- Content -->
-              <h5 class="text-uppercase font-weight-bold white">Qualidade</h5>
-              <p class="white">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-      
+        
+                <!-- Content -->
+                <h5 class="text-uppercase font-weight-bold white">Qualidade</h5>
+                <p class="white">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+        
             </div>
             <!-- Grid column -->
-      
+        
             <hr class="clearfix w-100 d-md-none pb-3">
-      
+        
             <!-- Grid column -->
             <div class="col-md-6 mb-md-0 mb-3">
-      
-              <!-- Content -->
-              <h5 class="text-uppercase font-weight-bold white">Satisfação</h5>
-              <p class="white">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-      
+        
+                <!-- Content -->
+                <h5 class="text-uppercase font-weight-bold white">Satisfação</h5>
+                <p class="white">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+        
             </div>
             <!-- Grid column -->
-      
-          </div>
-          <!-- Grid row -->
-      
+        
+            </div>
+            <!-- Grid row -->
+        
         </div>
         <!-- Footer Text -->
-      
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3 white">© 2018 Copyright:
-          <a href="https://mdbootstrap.com/education/bootstrap/" class="white"> MDBootstrap.com</a>
-        </div>
-        <!-- Copyright -->
-      
-      </footer>
-      <!-- Footer -->
+    </footer>
   </body>
 </html>

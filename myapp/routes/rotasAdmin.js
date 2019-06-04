@@ -89,6 +89,13 @@ router.get('/chat', function(req, res, next) {
     
 });
 
+router.get('/produtos', function(req, res, next) {
+    if(req.session["usuario"])
+        res.render('./loja_admin/produtos',{msg:req.session["usuario"],erros:{},dados:{}});
+    else
+        res.render('./loja_admin/index', {msg:"", erros:{}, dados:{}});
+})
+
 router.get('/logout', (req, res, next)=>{
 
     req.session.destroy(function(err) {
