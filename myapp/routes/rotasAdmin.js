@@ -91,7 +91,52 @@ router.get('/chat', function(req, res, next) {
 
 router.get('/produtos', function(req, res, next) {
     if(req.session["usuario"])
-        res.render('./loja_admin/produtos',{msg:req.session["usuario"],erros:{},dados:{}});
+    {
+
+        MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+            var dbo = db.db("zettaByte");
+            dbo.collection("produtos").find({}).sort({tipo:1}).toArray(function(err, result) {
+                if (err) throw err;
+                
+                res.render('./loja_admin/produtos',{msg:req.session["usuario"],erros:{},dados:result});
+                
+                console.log(result);
+                db.close();
+            });
+        });
+    }
+    else
+        res.render('./loja_admin/index', {msg:"", erros:{}, dados:{}});
+})
+
+router.get("/detalheproduto/:id", function(req, res, next) {
+    if(req.session["usuario"])
+    {   
+
+        /**
+         * Fazer a recuperação das informações pelo ID
+         */
+
+         let ID = req.params.id;
+
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+                var dbo = db.db("zettaByte");
+                dbo.collection("produtos").find({}).toArray(function(err, result) {
+                    if (err) throw err;
+                    
+                    //res.render('./loja_admin/produtos',{msg:req.session["usuario"],erros:{},dados:result});
+                    
+                    console.log(result);
+
+                    res.send("BLZ")
+                    
+                    db.close();
+                });
+            });
+        
+    }
     else
         res.render('./loja_admin/index', {msg:"", erros:{}, dados:{}});
 })

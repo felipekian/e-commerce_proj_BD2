@@ -69,13 +69,55 @@
     </header>
     <main>
     
-    <h1>ADMIN Produtos</h1>
-    
-    
-    
+        <% if(dados) { %>
+
+        <div class="container col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+        <div class="container col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                <div>
+                    <br>
+                    <h3 class="centro">Produtos</h3>
+                    <br>
+                </div>
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Nome</th>
+                            <th>Fabricante</th>
+                            <th>Tipo</th>
+                            <th>Preço</th>
+                            <th>Quantidade</th>
+                            <th>Descrição</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% dados.forEach(function(dado){ %>
+
+                            <tr>
+                                <td><%= dado.nomeproduto %></td>
+                                <td><%= dado.fabricante %></td>
+                                <td><%= dado.tipo %></td>
+                                <td>R$<%= dado.preco %>,00</td>
+                                <td><%= dado.quantidade %> unid</td>
+                                <td><%= dado.descricao%></td>
+                                <td><a href="/admin/detalheproduto/<%=dado._id%>"" class="btn btn-sm btn-primary">Detalhes</a></td>
+                                <td><a href="/admin/atualizarproduto/<%=dado._id%>" class="btn btn-sm btn-info">Atualizar</a></td>                                    
+                            </tr>
+
+                        <% }) %>
+                    </tbody>
+                </table>
+                <hr>
+        </div>
+        <div class="container col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+        <% } %>
+        
+        <br>
+        <br>
     </main>
     <!-- Footer -->
-    <footer id="footer" class="page-footer font-small teal pt-4 bg-dark fixar-rodape">
+    <footer id="footer" class="page-footer font-small teal pt-4 bg-dark ">
 
             <!-- Footer Text -->
             <div class="container-fluid text-center text-md-left">
