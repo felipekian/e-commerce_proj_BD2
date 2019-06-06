@@ -63,10 +63,7 @@ router.post('/cadastrarCliente', (req, res, next) => {
     req.assert("cpf", "CPF não passou na validação: somente números").isInt().notEmpty();
     req.assert("email", "Email não passou na validação.").isEmail().notEmpty();
     req.assert("endereco", "Endereco não passou na validação.").notEmpty();
-    req.assert("estado", "Estado não passou na validação.").isAlpha().notEmpty();
     req.assert("cidade", "cidade não passou na validação.").notEmpty();
-    req.assert("cep", "CEP não passou na validação: somente números.").isInt().notEmpty();
-    req.assert("cep", "CEP não passou na validação: CEP deve conter 8 dígitos.").len(8,8);
     req.assert("usuario", "Usuário vazio.").notEmpty();
     req.assert("senha", "senha não passou na validação campo vazio.").notEmpty();
     req.assert("senha", "senha não passou na validação precisa ter o tamanho entre 4 e 8 caracteres.").len(4,8);
@@ -83,6 +80,7 @@ router.post('/cadastrarCliente', (req, res, next) => {
 
     const sql = "insert into clientes set ?"
 
+    let senhaantiga = req.body.senha;
     //criptografia da senha
     let senha_crypt = crypto.createHash("md5").update(req.body.senha).digest("hex");
     req.body.senha = senha_crypt;
@@ -93,7 +91,8 @@ router.post('/cadastrarCliente', (req, res, next) => {
             res.render("./loja_clientes/login", {msg:"Cadastrado com sucesso, agora faça seu login.", dados:{}, erros:{}});
                        
         } else {
-            res.render("./loja_clientes/cadastro_clientes", {msg : "Usuário já possui cadastrado!", erros:{}, dados:req.body})
+            req.body.senha = senhaantiga;
+            res.render("./loja_clientes/cadastro_clientes", {msg : "Usuário já cadastrado!", erros:{}, dados:req.body})
             
         }
     })

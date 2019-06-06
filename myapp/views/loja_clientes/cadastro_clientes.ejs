@@ -14,7 +14,8 @@
     <link rel="icon" type="imagem/png" href="/images/animated_favicon1.gif" />
 
     <!-- JQuery, popper e bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="/javascripts/jquery.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     
@@ -67,7 +68,7 @@
                   <a class="nav-link" href="/carrinho">Carrinho</a>
               </li>
               <li class="nav-item">
-                    <% if(msg != "") {%>
+                    <% if(msg != "" && msg != "Usuário já cadastrado!") {%>
                         <a class="nav-link text-success" href="/logout">Logout - <%= msg %></a>
                     <% } else {%>
                         <a class="nav-link" href="/login">Login</a>
@@ -93,7 +94,7 @@
                 <h1 class="centro">Cadastro de Cliente</h1>
                 
 
-                <% if(msg) {%>
+                <% if(msg=="Usuário já cadastrado!") {%>
                     <br>
                     <h3 class="centro text-danger"><%= msg %></h3>
                 <% } %>
@@ -113,45 +114,46 @@
 
                 <div class="form-group">
                     <label for="nomecompleto">Nome completo</label>
-                    <input type="text" name="nomecompleto" id="nomecompleto" class="form-control" placeholder="Seu nome" value="<%= dados.nomecompleto %>" required autofocus>
+                    <input type="text" name="nomecompleto" id="nomecompleto" class="form-control"  value="<%= dados.nomecompleto %>" required autofocus>
                 </div>
                 <div class="form-group">
                     <label for="rg">RG</label>
-                    <input type="text" name="rg" id="rg" class="form-control" placeholder="Seu RG" value="<%= dados.rg %>"  required>
+                    <input type="text" name="rg" id="rg" class="form-control"  value="<%= dados.rg %>"  required>
                 </div>
                 <div class="form-group">
                     <label for="cpf">CPF</label>
-                    <input type="text" name="cpf" id="cpf" class="form-control" placeholder="Seu CPF" value="<%= dados.cpf %>" required>
+                    <input type="text" name="cpf" id="cpf" class="form-control"  value="<%= dados.cpf %>" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Seu email"  value="<%= dados.email %>" required>
+                    <input type="email" name="email" id="email" class="form-control"   value="<%= dados.email %>" required>
                 </div>
-                <br><br>
+                <br>
                 <div class="form-group">
-                    <label for="endereco">Endereço completo</label>
-                    <input type="text" name="endereco" id="endereco" class="form-control" placeholder="Seu endereço" value="<%= dados.endereco %>" required>
+                    <label for="cep">CEP</label>
+                    <input type="text" id="cep" class="form-control" name="cep"  value="<%= dados.cep %>" required>
                 </div>
                 <div class="form-group">
-                    <label for="estado">Estado</label>
-                    <input type="text" name="estado" id="estado" class="form-control" placeholder="Seu estado" value="<%= dados.estado %>" required>
+                    <label for="endereco">Endereço </label>
+                    <input type="text" name="endereco" id="endereco" class="form-control"  value="<%= dados.endereco %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="bairro">Bairro</label>
+                    <input type="text" name="bairro" id="bairro" class="form-control"  value="<%= dados.bairro %>" required>
                 </div>
                 <div class="form-group">
                     <label for="cidade">Cidade</label>
-                    <input type="text" name="cidade" id="cidade" class="form-control" placeholder="Sua cidade" value="<%= dados.cidade %>" required>
+                    <input type="text" name="cidade" id="cidade" class="form-control"  value="<%= dados.cidade %>" required>
                 </div>
-                <div>
-                    <label for="cep">CEP</label>
-                    <input type="text" name="cep" id="cep" class="form-control" placeholder="Seu CEP" value="<%= dados.cep %>" required>
-                </div>
-                <br><br>
+                
+                <br>
                 <div class="form-group">
                     <label for="usuario">Usuário</label>
-                    <input type="text" name="usuario" id="usuario" class="form-control"  placeholder="Usuário do sistema" value="<%= dados.usuario %>" required>
+                    <input type="text" name="usuario" id="usuario" class="form-control"   value="<%= dados.usuario %>" required>
                 </div>
                 <div class="form-group">
                     <label for="senha">Senha</label>
-                    <input type="password" name="senha" id="senha" class="form-control" placeholder="Senha de acesso" value="<%= dados.senha %>"  required>
+                    <input type="password" name="senha" id="senha" class="form-control"  value="<%= dados.senha %>"  required>
                 </div>
                 <br>
                 <div class="form-group">                
@@ -207,4 +209,38 @@
       </footer>
       <!-- Footer -->
   </body>
+
+  <script>
+      
+        $('#cep').blur(function(e){
+          var cep = $('#cep').val();
+          var url = "http://viacep.com.br/ws/"+cep+"/json";
+          var validacaocep=/^[0-9]{8}$/;
+  
+          if( validacaocep.test(cep) ){
+              pesquisarCEP(url);
+              $('#mensagem').hide();
+          } else {
+              $('#mensagem').show();
+              $('#mensagem').html("CEP Inválido!");
+          }
+        });
+  
+        function pesquisarCEP (endereco) {
+            $.ajax({
+                type:"GET",
+                url:endereco,
+                async:false
+            }).done(function(data){
+                console.log(data);
+                $('#endereco').val(data.logradouro);
+                $('#bairro').val(data.bairro);
+                $('#cidade').val(data.localidade);
+            }).fail(function(){
+              console.log("ERRO");
+            });
+        }
+  
+      
+    </script>
 </html>

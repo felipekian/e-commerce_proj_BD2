@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const conexaoMDB = require('../config/con_mariaDB');
 var MongoClient = require('mongodb').MongoClient;
+var mongo = require('mongodb');
 var url = "mongodb://localhost:27017/";
 const crypto = require("crypto");
 const path = require('path');
@@ -119,19 +120,18 @@ router.get("/detalheproduto/:id", function(req, res, next) {
          */
 
          let ID = req.params.id;
+         var o_id = new mongo.ObjectID(ID);
 
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
                 var dbo = db.db("zettaByte");
-                dbo.collection("produtos").find({}).toArray(function(err, result) {
+                dbo.collection("produtos").find({"_id" : o_id}).toArray(function(err, result) {
                     if (err) throw err;
                     
-                    //res.render('./loja_admin/produtos',{msg:req.session["usuario"],erros:{},dados:result});
+                    res.render('./loja_admin/detalhe',{msg:req.session["usuario"],erros:{},dados:result});
                     
                     console.log(result);
 
-                    res.send("BLZ")
-                    
                     db.close();
                 });
             });
