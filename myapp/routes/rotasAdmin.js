@@ -141,6 +141,33 @@ router.get("/detalheproduto/:id", function(req, res, next) {
         res.render('./loja_admin/index', {msg:"", erros:{}, dados:{}});
 })
 
+
+router.get("/atualizarproduto/:id", function(req, res, next) {
+    if(req.session["usuario"])
+    {
+         let ID = req.params.id;
+         var o_id = new mongo.ObjectID(ID);
+
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+                var dbo = db.db("zettaByte");
+                dbo.collection("produtos").find({"_id" : o_id}).toArray(function(err, result) {
+                    if (err) throw err;
+                    
+                    res.render('./loja_admin/atualizarproduto',{msg:req.session["usuario"],erros:{},dados:result});
+                    
+                    console.log(result);
+
+                    db.close();
+                });
+            });
+        
+    }
+    else
+        res.render('./loja_admin/index', {msg:"", erros:{}, dados:{}});
+})
+
+
 router.get('/logout', (req, res, next)=>{
 
     req.session.destroy(function(err) {
@@ -347,6 +374,13 @@ router.post('/cadastrarProduto',upload.single('file'), (req, res, next) => {
         });
     });
 })
+
+router.post("/atualizarproduto", function(req, res, next) {
+    console.log("req.body")
+
+    res.send("FALTA FAZER A PARTE DE ATUALIZAÇÃO DO PRODUTO NO BANCO MONGODB");
+})
+
 
 /* PUT's */
 

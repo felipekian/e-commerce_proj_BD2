@@ -27,16 +27,18 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 
     <style>
-        #foto{            
-            margin-bottom: 30px;
-        }
-
-        #data{            
-            margin-bottom: 30px;
-        }
-
-    </style>
+            #foto{            
+                margin-bottom: 30px;
+            }
     
+            #data{            
+                margin-bottom: 30px;
+            }
+
+            
+    
+        </style>
+
   </head>
   
   <body>
@@ -79,7 +81,7 @@
 
         <div >
             <br>
-            <h3 class="centro">Detalhes</h3>
+            <h3 class="centro">Atualizar Produto</h3>
             <br>
         </div>
 
@@ -93,19 +95,41 @@
             </div>
             <div class=" container col-sm-5 col-md-5 col-lg-5 col-xl-5" id="data">
                 
-                <dl>
-                    <dt> <b> Nome do produto:</b> </dt><dd><%= dado.nomeproduto %></dd>
-                    
-                    <dt> <b> Marca: </b></dt><dd><%= dado.fabricante %></dd>
-                
-                    <dt><b> Tipo de produto:</b></dt> <dd><%= dado.tipo %> </dd>
-                
-                    <dt><b> Preço:</b></dt> <dd>R$<%= dado.preco %>,00</dd> 
-                
-                    <dt><b> Quantidade Disponível: </b></dt> <dd><%= dado.quantidade %> unid</dd>
-                
-                    <dt><b> descrição do produto: </b></dt> <dd><%= dado.descricao%></dd>
-                </dl>
+                <form action="/admin/atualizarproduto" method="POST">
+                    <div class="form-group">
+                        <label for="nome"><b> Nome do produto:</b></label>
+                        <input type="text" class="form-control" id="nome" name="nomeproduto" value="<%= dado.nomeproduto %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="marca"><b> Marca: </b></label>
+                        <input type="text" class="form-control" id="marca" name="fabricante"  value="<%= dado.fabricante %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo"><b> Tipo de produto:</b></label>
+                        <input type="text" class="form-control"  id="tipo" name="tipo" value="<%= dado.tipo %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="preco"><b> Preço:</b></label>
+                        <input type="number" class="form-control"  id="preco" name="preco" value="<%= dado.preco %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="quantidade"><b> Quantidade Disponível: </b></label>
+                        <input type="number" class="form-control"  id="quantidade" name="quantidade" value="<%= dado.quantidade %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="descricao"><b> descrição do produto: </b></label>
+                        <textarea name="descricao" id="descricao" cols="30" rows="5"  class="form-control"><%= dado.descricao%></textarea>
+                        
+                        
+                    </div>
+                    <input type="hidden" name="_id" value="<%= dado._id %>">
+                    <div class="form-group">
+                        <br>
+                        <input type="submit" value="Atualizar" class="btn  btn-warning">
+                    </div>
+                </form>
+
+
             </div>
         <% }) %>
         <div class=" container col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
