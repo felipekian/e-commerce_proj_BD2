@@ -74,37 +74,110 @@
                     <% } %>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-            </form>
+            
           </div>
       </nav>
     </header>
     <main>
 
+        <div>
+            <br>
+            <h4 class="centro">Comparar Produtos</h4>
+            <br>
 
-      <h1>comparar</h1>
+            <form action="/comparaprodutos" method="POST">
+            <div class="row">
+                <div class="container col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+                <div class="container col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                    <select name="prod1" id="prod1" class="form-control" autofocus>
+                        <% dados.forEach(function(dado){ %>
+                            <option value="<%=dado._id%>"> 
+                                <%= dado.nomeproduto %> 
+                            </option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="container col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                    <select name="prod2" id="prod2" class="form-control">
+                        <% dados.forEach(function(dado){ %>
+                            <option value="<%=dado._id%>"> 
+                                <%= dado.nomeproduto %> 
+                            </option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="container col-sm-1 col-md-1 col-lg-1 col-xl-1 form-group">
+                    <input type="submit" class="btn btn-primary" value="Comparar">
+                </div>
+                <div class="container col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+            </div>
+            <br>
+            </form>
+
+        </div>
+
+        <div class="row">
+                <div class="container col-sm-1 col-md-1 col-lg-1 col-xl-1   "></div>
+                <div class="container col-sm-5 col-md-5 col-lg-5 col-xl-5   ">
+                
+                    <% if(dadosum[0] != undefined ){ %>
+                        
+                        <% dadosum.forEach(function(dado){ %>
+
+                            <img class="img-thumbnail  img-fluid imgdetalhe " src='/<%= dado.img %>' alt="foto produto"> 
+
+                            <dl>
+                                    <dt> <b> Nome do produto:</b> </dt><dd><%= dado.nomeproduto %></dd>
+                                    
+                                    <dt> <b> Marca: </b></dt><dd><%= dado.fabricante %></dd>
+                                
+                                    <dt><b> Tipo de produto:</b></dt> <dd><%= dado.tipo %> </dd>
+                                
+                                    <dt><b> Preço:</b></dt> <dd>R$<%= dado.preco %>,00</dd> 
+                                
+                                    <dt><b> Quantidade Disponível: </b></dt> <dd><%= dado.quantidade %> unid</dd>
+                                
+                                    <dt><b> descrição do produto: </b></dt> <dd><%= dado.descricao%></dd>
+                                    
+                                </dl>
+                                <a href="" class="btn btn-sm btn-info">Adicionar no Carrinho</a>
+                        <% }) %>
 
 
+                    <% } %>
+                </div>
+                <div class="container col-sm-5 col-md-5 col-lg-5 col-xl-5">
+    
+                    
+                    <% if(dadosdois[0] != undefined){ %>
+                        <% dadosdois.forEach(function(dado){ %>
+                            <img class="img-thumbnail  img-fluid imgdetalhe " src='/<%= dado.img %>' alt="foto produto"> 
+
+                            <dl>
+                                    <dt> <b> Nome do produto:</b> </dt><dd><%= dado.nomeproduto %></dd>
+                                    
+                                    <dt> <b> Marca: </b></dt><dd><%= dado.fabricante %></dd>
+                                
+                                    <dt><b> Tipo de produto:</b></dt> <dd><%= dado.tipo %> </dd>
+                                
+                                    <dt><b> Preço:</b></dt> <dd>R$<%= dado.preco %>,00</dd> 
+                                
+                                    <dt><b> Quantidade Disponível: </b></dt> <dd><%= dado.quantidade %> unid</dd>
+                                
+                                    <dt><b> descrição do produto: </b></dt> <dd><%= dado.descricao%></dd>
+                                    
+                                </dl>
+                                <a href="" class="btn btn-sm btn-info">Adicionar no Carrinho</a>
+                        <% }) %>
+                    <% } %>
+                    
+    
+                </div>
+                <div class="container col-sm-1 col-md-1 col-lg-1 col-xl-1   "></div>
+            </div>
+    
 
 
-
-
-
-     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     </main>
     <!-- Footer -->
     <footer class="page-footer font-small teal pt-4 bg-dark fixar-rodape">

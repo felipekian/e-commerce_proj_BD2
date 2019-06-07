@@ -87,8 +87,8 @@
                             <th scope="col">Nome</th>
                             <th scope="col">Cidade</th>
                             <th scope="col">Compras</th>
-                            <th scope="col">Atualizar</th>
-                            <th scope="col">Deletar</th>            
+                            <!--<th scope="col">Atualizar</th>
+                            <th scope="col">Deletar</th>-->
                         </tr>
                     </thead>
                     <tbody>
@@ -97,9 +97,10 @@
                             <td scope="row"><%= dados[i].clienteID %></td>
                             <td><%= dados[i].nomecompleto %></td>
                             <td><%= dados[i].cidade %></td>
-                            <td> <a href=" /admin/compras/:<%= dados[i].clienteID %> "><button class="btn btn-sm btn-primary">Compras</button></a> </td>
-                            <td> <a href=" /admin/atualizardados/:<%=dados[i].clienteID %>"><button class="btn btn-sm btn-warning">Atualizar</button></a> </td>
-                            <td> <a href=" /admin/deletardados/:<%=dados[i].clienteID %>"><button class="btn btn-sm btn-danger">Deletar</button></a></td>
+                            <td> <a href="/admin/compra/<%= dados[i].clienteID %> "><button class="btn btn-sm btn-primary">Compras</button></a> </td>
+                            
+                            <!--<td> <a href=" /admin/atualizardados/:<%=dados[i].clienteID %>"><button class="btn btn-sm btn-warning">Atualizar</button></a> </td>
+                            <td> <a href=" /admin/deletardados/:<%=dados[i].clienteID %>"><button class="btn btn-sm btn-danger">Deletar</button></a></td>-->
                         </tr>
                     <% } %>
                 </tbody>

@@ -5,6 +5,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  padding-bottom: 300px;
 }
 
 .white{
@@ -15,23 +16,24 @@ body {
     text-align: center;
 }
 
+
 .fixar-rodape{
     bottom: 0;
     left: 0;   
     position: fixed;
     width: 100%;
-    
 }
 
 dl {
     display: block;
     margin-top: 1em;
     margin-bottom: 1em;
-    margin-left: 0;
-    margin-right: 0;
+    
   }
 
 .imgdetalhe{
     width: 95%;
+    max-width: 300px;
+    max-height: 300px;
     border: 2px solid darkgrey;
 }

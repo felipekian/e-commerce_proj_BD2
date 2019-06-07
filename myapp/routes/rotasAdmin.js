@@ -167,6 +167,13 @@ router.get("/atualizarproduto/:id", function(req, res, next) {
         res.render('./loja_admin/index', {msg:"", erros:{}, dados:{}});
 })
 
+router.get("/compra/:id", function(req, res, next){
+
+    console.log(req.params.id);
+
+    res.send("FALTA VERIFICAR NO BANCO E FAZER TELA DE DETALHE DA COMPRA")
+})
+
 
 router.get('/logout', (req, res, next)=>{
 
@@ -378,8 +385,23 @@ router.post('/cadastrarProduto',upload.single('file'), (req, res, next) => {
 router.post("/atualizarproduto", function(req, res, next) {
     console.log("req.body")
 
-    res.send("FALTA FAZER A PARTE DE ATUALIZAÇÃO DO PRODUTO NO BANCO MONGODB");
-})
+    let ID = req.body.id;
+    var o_id = new mongo.ObjectID(ID);
+
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("zettaByte");
+
+        var myquery = { "_id": o_id };
+        var newvalues = { $set: req.body};
+        dbo.collection("produtos").updateOne(myquery, newvalues, function(err, res) {
+          if (err) throw err;
+          console.log("1 document updated");          
+          db.close();
+        });
+    });
+    res.redirect('/admin/produtos');
+});
 
 
 /* PUT's */

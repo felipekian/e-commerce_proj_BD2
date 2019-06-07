@@ -105,14 +105,17 @@
                     <dt><b> Quantidade Disponível: </b></dt> <dd><%= dado.quantidade %> unid</dd>
                 
                     <dt><b> descrição do produto: </b></dt> <dd><%= dado.descricao%></dd>
+                    
                 </dl>
+                <a href="/admin/atualizarproduto/<%=dado._id%>" class="btn btn-sm btn-info">Editar Informações</a>
+                <br>
             </div>
         <% }) %>
         <div class=" container col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
         </div>
     </main>
     <!-- Footer -->
-    <footer id="footer" class="page-footer font-small teal pt-4 bg-dark">
+    <footer id="footer" class="page-footer font-small teal pt-4 bg-dark navbar-fixed-bottom fixar-rodape">
 
             <!-- Footer Text -->
             <div class="container-fluid text-center text-md-left">

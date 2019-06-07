@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 const conexaoMDB = require('../config/con_mariaDB');
 const crypto = require("crypto");
+var MongoClient = require('mongodb').MongoClient;
+var mongo = require('mongodb');
+var url = "mongodb://localhost:27017/";
 
 var connectionMDB = conexaoMDB()
 
@@ -30,7 +33,21 @@ router.get('/recuperar_login_cliente', (req, res, next) => {
 
 router.get('/comparar_produtos', (req, res, next) => {
     if ( req.session["usuario"] )
-        res.render('./loja_clientes/comparar_produtos',{msg:req.session["usuario"],erros:{}, dados:{}});
+    {
+
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("zettaByte");
+            dbo.collection("produtos").find({}).sort({tipo:1}).toArray(function(err, result) {
+                if (err) throw err;
+                
+                res.render('./loja_clientes/comparar_produtos',{msg:req.session["usuario"],erros:{}, dados:result , dadosum:{}, dadosdois:{}});
+
+                console.log(result);
+                db.close();
+            });
+        });
+    }
     else
         res.render('./loja_clientes/login',{msg:"",erros:{}, dados:{}});
 })
@@ -208,6 +225,69 @@ router.post("/validarUsuario", function(req, res, next) {
             res.render("./loja_clientes/login", {msg:"Dados não conferem, tente de novo!", erros:{}, dados:req.body})
         }
     })
+})
+
+router.post('/comparaprodutos', function(req, res, next) {
+
+    console.log(req.body)
+
+    let produtoid1 = req.body.prod1;
+    let produtoid2 = req.body.prod2;
+
+    var prod1_id = new mongo.ObjectID(produtoid1);
+    var prod2_id = new mongo.ObjectID(produtoid2);
+
+    var resultProd1 = {};
+    var resultProd2 = {};
+    var todos  = {};
+
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("zettaByte");
+        dbo.collection("produtos").find({"_id" : prod1_id}).toArray(function(err, result) {
+            if (err) throw err;
+            resultProd1 = result;
+            //console.log("\n\nPRODUTO1: "+result);
+            db.close();
+        });
+    });
+
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("zettaByte");
+        dbo.collection("produtos").find({"_id" : prod2_id}).toArray(function(err, result) {
+            if (err) throw err;
+            resultProd2 = result;
+            //console.log("\n\nPRODUTO2: "+result);
+            db.close();
+        });
+    });
+
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("zettaByte");
+        dbo.collection("produtos").find({}).sort({tipo:1}).toArray(function(err, result) {
+            if (err) throw err;            
+            todos = result;
+
+            console.log("\n\nTODOS: "+todos);
+
+            console.log("\n\nPROD1: "+resultProd1)
+
+            console.log("\n\nPROD2: "+resultProd2)
+
+            res.render('./loja_clientes/comparar_produtos',{msg:req.session["usuario"],erros:{}, dados:todos , dadosum:resultProd1, dadosdois:resultProd2});
+            db.close();
+        });
+    });
+
+    console.log(resultProd1, resultProd2, todos);
+
+    
+
+    //res.render('./loja_clientes/comparar_produtos',{msg:req.session["usuario"],erros:{}, dados:todos , dados1:produtoid1, dados2:produtoid2});
+    
+
 })
 
 /* PUT's */
