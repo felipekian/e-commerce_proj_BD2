@@ -26,6 +26,12 @@
     <!-- Fonte do google fonts - Roboto -->
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     
+    <style>
+        .botaoCarrinho{
+            margin-bottom: 30px;
+        }
+    </style>
+
   </head>
   
   <body>
@@ -89,20 +95,32 @@
             <div class="row">
                 <div class="container col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
                 <div class="container col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                    <select name="prod1" id="prod1" class="form-control" autofocus>
+                    <select name="prod1" id="prod1" class="form-control" value="<%= selecionados.prod1 %>"  autofocus>
                         <% dados.forEach(function(dado){ %>
-                            <option value="<%=dado._id%>"> 
-                                <%= dado.nomeproduto %> 
-                            </option>
+                            <% if (dado._id == selecionados.prod1) {%>
+                                <option value="<%=dado._id%>" selected> 
+                                    <%= dado.nomeproduto %> 
+                                </option>
+                            <% } else { %>
+                                <option value="<%=dado._id%>"> 
+                                    <%= dado.nomeproduto %> 
+                                </option>
+                            <% } %>
                         <% }) %>
                     </select>
                 </div>
                 <div class="container col-sm-4 col-md-4 col-lg-4 col-xl-4">
                     <select name="prod2" id="prod2" class="form-control">
                         <% dados.forEach(function(dado){ %>
-                            <option value="<%=dado._id%>"> 
-                                <%= dado.nomeproduto %> 
-                            </option>
+                            <% if (dado._id == selecionados.prod2) {%>
+                                <option value="<%=dado._id%>" selected> 
+                                    <%= dado.nomeproduto %> 
+                                </option>
+                            <% } else { %>
+                                <option value="<%=dado._id%>"> 
+                                    <%= dado.nomeproduto %> 
+                                </option>
+                            <% } %>
                         <% }) %>
                     </select>
                 </div>
@@ -140,7 +158,7 @@
                                     <dt><b> descrição do produto: </b></dt> <dd><%= dado.descricao%></dd>
                                     
                                 </dl>
-                                <a href="" class="btn btn-sm btn-info">Adicionar no Carrinho</a>
+                                <a href=""  class="btn btn-sm btn-success botaoCarrinho"><img title="Adicionar produto no carrinho." src="/images/shopping-cart.png"></a>
                         <% }) %>
 
 
@@ -167,7 +185,7 @@
                                     <dt><b> descrição do produto: </b></dt> <dd><%= dado.descricao%></dd>
                                     
                                 </dl>
-                                <a href="" class="btn btn-sm btn-info">Adicionar no Carrinho</a>
+                                <a href=""  class="btn btn-sm btn-success botaoCarrinho"><img  title="Adicionar produto no carrinho." src="/images/shopping-cart.png"></a>
                         <% }) %>
                     <% } %>
                     

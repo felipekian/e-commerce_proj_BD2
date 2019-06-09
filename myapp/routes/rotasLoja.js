@@ -10,16 +10,35 @@ var connectionMDB = conexaoMDB()
 
 /* GET's. */
 router.get('/', function(req, res, next) {
-    if ( req.session["usuario"] )
-        res.render('./loja_clientes/index',{msg:req.session["usuario"]});
-    else        
-        res.render('./loja_clientes/index', {msg:""});  
+
+    var produt = {};
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("zettaByte");
+        dbo.collection("produtos").find({}).toArray(function(err, result) {
+            if (err) throw err;
+            
+            produt = result;
+            console.log("PRODUTOS: "+produt[0])
+
+            if ( req.session["usuario"] )
+            {
+                res.render('./loja_clientes/index',{msg:req.session["usuario"], produtos:produt, sinal:0});
+            }
+            else
+            {
+                res.render('./loja_clientes/index', {msg:"", produtos:produt, sinal:0});
+            }
+
+            db.close();
+        });
+    });
 });
 
 router.get('/login', (req, res, next) => {
     if ( req.session["usuario"] )
         res.render('./loja_clientes/login',{msg:req.session["usuario"],erros:{}, dados:{}});
-    else        
+    else
         res.render('./loja_clientes/login', {msg:"", dados:{}, erros:{}});
 })
 
@@ -34,14 +53,13 @@ router.get('/recuperar_login_cliente', (req, res, next) => {
 router.get('/comparar_produtos', (req, res, next) => {
     if ( req.session["usuario"] )
     {
-
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
             var dbo = db.db("zettaByte");
             dbo.collection("produtos").find({}).sort({tipo:1}).toArray(function(err, result) {
                 if (err) throw err;
                 
-                res.render('./loja_clientes/comparar_produtos',{msg:req.session["usuario"],erros:{}, dados:result , dadosum:{}, dadosdois:{}});
+                res.render('./loja_clientes/comparar_produtos',{msg:req.session["usuario"],erros:{}, dados:result , dadosum:{}, dadosdois:{}, selecionados:{}});
 
                 console.log(result);
                 db.close();
@@ -66,8 +84,31 @@ router.get('/logout', (req, res, next)=>{
         console.log("Sessão destruida");
     })
 
-    res.render('./loja_clientes/index', {msg:"", dados:{}, erros:{}})
+    res.redirect('/')
 })
+
+router.get('/produto/:id', function(req, res, next) {
+    console.log(req.params.id);
+
+    if( req.session["usuario"] ) {
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("zettaByte");
+            dbo.collection("produtos").find({ "tipo" : req.params.id }).sort({preco:1}).toArray(function(err, result) {
+                if (err) throw err;
+                
+                res.render('./loja_clientes/index',{msg:req.session["usuario"], produtos:result, sinal:1});
+
+                console.log(result);
+                db.close();
+            });
+        });
+    
+    } 
+    else {
+        res.render('./loja_clientes/login',{msg:"",erros:{}, dados:{}});
+    }
+});
 
 
 /* POST's */
@@ -218,7 +259,10 @@ router.post("/validarUsuario", function(req, res, next) {
             req.session["usuario"]   = results[0].usuario;
             req.session["clienteID"] = results[0].clienteID;            
 
-            res.render("./loja_clientes/index", {msg:results[0].usuario});
+            //res.render("./loja_clientes/index", {msg:results[0].usuario});
+            
+            res.redirect("/");
+
 
         }else{
             //retornar a pagina com os erros
@@ -241,6 +285,35 @@ router.post('/comparaprodutos', function(req, res, next) {
     var resultProd2 = {};
     var todos  = {};
 
+/**
+ *  Encadeia as consultas por serem assincronas e com isso não da o erro de ele retornar as informações incompletas.
+ */
+
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("zettaByte");
+        dbo.collection("produtos").find({"_id" : prod1_id}).toArray(function(err, result) {
+            if (err) throw err;
+            resultProd1 = result;
+            
+            dbo.collection("produtos").find({"_id" : prod2_id}).toArray(function(err, result) {
+                if (err) throw err;
+                resultProd2 = result;
+                
+                dbo.collection("produtos").find({}).sort({tipo:1}).toArray(function(err, result) {
+                    if (err) throw err;
+                    todos = result;
+                    
+                    res.render('./loja_clientes/comparar_produtos',{msg:req.session["usuario"],erros:{}, dados:todos , dadosum:resultProd1, dadosdois:resultProd2, selecionados:req.body});
+                    db.close();
+                });
+            });
+        });
+    });
+
+
+
+/*
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("zettaByte");
@@ -251,7 +324,8 @@ router.post('/comparaprodutos', function(req, res, next) {
             db.close();
         });
     });
-
+*/
+/*
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("zettaByte");
@@ -262,29 +336,22 @@ router.post('/comparaprodutos', function(req, res, next) {
             db.close();
         });
     });
-
+*/
+/*
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("zettaByte");
         dbo.collection("produtos").find({}).sort({tipo:1}).toArray(function(err, result) {
             if (err) throw err;            
             todos = result;
-
-            console.log("\n\nTODOS: "+todos);
-
-            console.log("\n\nPROD1: "+resultProd1)
-
-            console.log("\n\nPROD2: "+resultProd2)
-
-            res.render('./loja_clientes/comparar_produtos',{msg:req.session["usuario"],erros:{}, dados:todos , dadosum:resultProd1, dadosdois:resultProd2});
+            
+            res.render('./loja_clientes/comparar_produtos',{msg:req.session["usuario"],erros:{}, dados:todos , dadosum:resultProd1, dadosdois:resultProd2, selecionados:req.body});
             db.close();
         });
     });
-
-    console.log(resultProd1, resultProd2, todos);
+*/
 
     
-
     //res.render('./loja_clientes/comparar_produtos',{msg:req.session["usuario"],erros:{}, dados:todos , dados1:produtoid1, dados2:produtoid2});
     
 

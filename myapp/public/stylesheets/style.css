@@ -24,6 +24,7 @@ body {
     width: 100%;
 }
 
+
 dl {
     display: block;
     margin-top: 1em;
@@ -32,8 +33,47 @@ dl {
   }
 
 .imgdetalhe{
-    width: 95%;
+
+    min-width: 300px;
+    min-height: 300px;
+
     max-width: 300px;
     max-height: 300px;
+
+    width: 300px;
+    height: 300px;
+
     border: 2px solid darkgrey;
 }
+
+.imgcarrossel{
+    width: 95%;
+    max-width: 350px;
+    max-height: 350px;
+    margin: 0 auto;
+}
+
+.direcao {
+    background: rgb(192,192,192);
+}
+.direcao:hover {
+    background: rgb(169,169,169)
+}
+
+.caption{
+    color: black;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.money{
+    color: white;
+    font-size: 2em;
+    
+}
+
+.fototabela{
+    width: 80px;
+    height: 80px;
+}
+
