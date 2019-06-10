@@ -25,6 +25,12 @@
 
     <!-- Fonte do google fonts - Roboto -->
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+    <style>
+        footer{
+            margin-bottom: -300px;
+        }
+    </style>
     
   </head>
   
@@ -71,8 +77,8 @@
     
         <% if(dados) { %>
 
-        <div class="container col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
-        <div class="container col-sm-10 col-md-10 col-lg-10 col-xl-10">
+        
+        
                 <div>
                     <br>
                     <h3 class="centro">Produtos</h3>
@@ -81,6 +87,7 @@
                 <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
+                            <th></th>
                             <th>Nome</th>
                             <th>Fabricante</th>
                             <th>Tipo</th>
@@ -95,6 +102,7 @@
                         <% dados.forEach(function(dado){ %>
 
                             <tr>
+                                <td><img src='<%= "/"+ dado.img %>' class="fototabela"></td>
                                 <td><%= dado.nomeproduto %></td>
                                 <td><%= dado.fabricante %></td>
                                 <td><%= dado.tipo %></td>
@@ -108,16 +116,15 @@
                         <% }) %>
                     </tbody>
                 </table>
-                <hr>
-        </div>
-        <div class="container col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+        
+        
         <% } %>
         
         <br>
         <br>
     </main>
     <!-- Footer -->
-    <footer id="footer" class="page-footer font-small teal pt-4 bg-dark fixar-rodape">
+    <footer id="footer" class="page-footer font-small teal pt-4 bg-dark ">
 
             <!-- Footer Text -->
             <div class="container-fluid text-center text-md-left">

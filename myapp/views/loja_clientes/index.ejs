@@ -130,7 +130,7 @@
                                     <img class="d-block w-100 imgcarrossel" src='<%= dado.img %>' >
 
                                     <h3 class="caption centro"> <%= dado.nomeproduto %> </h3>
-                                    <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><a src="#" class="btn btn-md btn-success    "> <img src="/images/shopping-cart.png"></a></p>
+                                    <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><a href="/salvarcarrinho/<%=dado._id%>" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></a></p>
                                         
                                    
                                 </div>
@@ -141,7 +141,8 @@
                                         <img class="d-block w-100 imgcarrossel" src='<%= dado.img %>' >
 
                                     <h3 class="caption centro"> <%= dado.nomeproduto %> </h3>
-                                    <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><a src="#" class="btn btn-md btn-success    "> <img src="/images/shopping-cart.png"></a></p>
+                                    <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><a href="/salvarcarrinho/<%=dado._id%>" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></a></p>
+                                        
                                        
                                     </div>
                                 
@@ -186,7 +187,8 @@
                     <td><%= dado.descricao%></td>
                     <td><span class=" badge badge-secondary aumentaP">R$ <%= dado.preco%>,00</span></td>
                     <td><span title="quantidade em estoque." class=" badge badge-secondary aumentaP largura"> <%= dado.quantidade %></span></td>
-                    <td><a src="#" class="btn btn-md btn-success tamanhoBotao"> <img src="/images/shopping-cart.png" title="Adicionar produto no carrinho."></a></td>
+                    
+                    <td><a href="/salvarcarrinho/<%= dado._id %>" class="btn btn-md btn-success tamanhoBotao"> <img src="/images/shopping-cart.png" title="Adicionar produto no carrinho."> </a></td>
                 </tr>
 
             <% }) %>            
@@ -234,4 +236,8 @@
             <!-- Footer Text -->
         </footer>
   </body>
+
+
+
+
 </html>

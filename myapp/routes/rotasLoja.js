@@ -73,10 +73,44 @@ router.get('/comparar_produtos', (req, res, next) => {
 router.get('/carrinho', (req, res, next) => {
     // fazer as tratativas caso o cliente nao estaja logado na página
     if ( req.session["usuario"] )
-        res.render('./loja_clientes/carrinho',{msg:req.session["usuario"],erros:{}, dados:{}});
+    {
+        var id_cliente = req.session["clienteID"];
+        var dados_produto = {};
+
+
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("zettaByte");
+
+            //faz a busca nos produtos salvos no carrinho de compra
+
+            dbo.collection("carrinho").find({ "cliente_id" : id_cliente }).toArray(function(err, result) {
+                if (err) throw err;
+
+                //erro para inserir no ids
+                ids = []
+
+                result.forEach(element => {
+                    ids.insert( new mongo.ObjectID(element.produto_id) )
+                });
+
+                //retornando os produtos salva no carrinho pelo cliente, faz-se uma consulta para retornar os produtos para listagem no carrinho.
+                dbo.collection("produtos").find({ "_id" : { $in : ids } }).toArray(function(err, resultado) {
+                    if (err) throw err;
+                    
+                    res.render('./loja_clientes/carrinho',{msg:req.session["usuario"],erros:{}, dados:resultado});
+    
+                    console.log(resultado);
+                    db.close();
+                });
+            });
+        });
+    }
     else
         res.render('./loja_clientes/login',{msg:"",erros:{}, dados:{}});
 })
+
+
 
 router.get('/logout', (req, res, next)=>{
 
@@ -86,6 +120,8 @@ router.get('/logout', (req, res, next)=>{
 
     res.redirect('/')
 })
+
+
 
 router.get('/produto/:id', function(req, res, next) {
     console.log(req.params.id);
@@ -110,6 +146,34 @@ router.get('/produto/:id', function(req, res, next) {
     }
 });
 
+
+router.get('/salvarcarrinho/:id', function(req, res, next) {
+    if ( req.session["usuario"] ){
+        
+        var id = req.params.id;
+        var id_cliente = req.session["clienteID"];
+
+        inserir = {
+            "produto_id" : id,
+            "cliente_id" : id_cliente
+        }
+        
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("zettaByte");        
+            dbo.collection("carrinho").insert( inserir , function(err, result) {
+                
+                res.redirect("/")
+                db.close();
+                    
+            });
+        });
+
+    } 
+    else {
+        res.render('./loja_clientes/login',{msg:"",erros:{}, dados:{}});
+    }
+})
 
 /* POST's */
 router.post('/cadastrarCliente', (req, res, next) => {
