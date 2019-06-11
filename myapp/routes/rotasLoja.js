@@ -84,14 +84,14 @@ router.get('/carrinho', (req, res, next) => {
 
             //faz a busca nos produtos salvos no carrinho de compra
 
-            dbo.collection("carrinho").find({ "cliente_id" : id_cliente }).toArray(function(err, result) {
+            dbo.collection("carrinho").find({ "cliente_id" : id_cliente }, {_id:0, produto_id:1, cliente_id:0}).toArray(function(err, result) {
                 if (err) throw err;
 
                 //erro para inserir no ids
                 ids = []
 
                 result.forEach(element => {
-                    ids.insert( new mongo.ObjectID(element.produto_id) )
+                    ids.push( new mongo.ObjectID(element.produto_id) )
                 });
 
                 //retornando os produtos salva no carrinho pelo cliente, faz-se uma consulta para retornar os produtos para listagem no carrinho.
@@ -110,6 +110,36 @@ router.get('/carrinho', (req, res, next) => {
         res.render('./loja_clientes/login',{msg:"",erros:{}, dados:{}});
 })
 
+
+router.get('/excluirProdutoCarrinho/:id', function(req, res, next) {
+
+    if( req.session["usuario"] ) {
+
+        var produto_id = req.params.id;
+        var id_cliente = req.session["clienteID"];
+
+        console.log("\n\nPRODUTO_ID: "+ produto_id);
+
+
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("zettaByte");
+
+            var myquery = { $and: [{produto_id:produto_id},{cliente_id:id_cliente}] };
+
+            dbo.collection("carrinho").deleteOne(myquery, function(err, obj) {
+              if (err) throw err;
+              console.log("1 document deleted");
+              res.redirect('/carrinho');
+              db.close();
+            });
+        });
+        
+    }else {
+        res.render('./loja_clientes/login',{msg:"",erros:{}, dados:{}});
+    }
+
+})
 
 
 router.get('/logout', (req, res, next)=>{
@@ -160,7 +190,7 @@ router.get('/salvarcarrinho/:id', function(req, res, next) {
         
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
-            var dbo = db.db("zettaByte");        
+            var dbo = db.db("zettaByte");
             dbo.collection("carrinho").insert( inserir , function(err, result) {
                 
                 res.redirect("/")
@@ -174,6 +204,7 @@ router.get('/salvarcarrinho/:id', function(req, res, next) {
         res.render('./loja_clientes/login',{msg:"",erros:{}, dados:{}});
     }
 })
+
 
 /* POST's */
 router.post('/cadastrarCliente', (req, res, next) => {

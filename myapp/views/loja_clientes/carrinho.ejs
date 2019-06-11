@@ -25,6 +25,29 @@
 
     <!-- Fonte do google fonts - Roboto -->
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+    <style>
+        
+        .aumentaP{
+            padding-top: 8px;
+            padding-bottom: 8px;
+            font-size: 1em;
+        }
+
+        .aumentaQ{
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        
+        .largura{
+            width: 65px;
+        }
+
+
+        .tamInput{
+            width: 80px;
+        }
+    </style>
     
   </head>
   
@@ -83,69 +106,89 @@
     </header>
     <main>
 
-
-      <h1>Carrinho</h1>
-
-
-
-
-
-
-
-     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    </main>
-    <!-- Footer -->
-    <footer class="page-footer font-small teal pt-4 bg-dark fixar-rodape">
-
-        <!-- Footer Text -->
-        <div class="container-fluid text-center text-md-left">
-      
-          <!-- Grid row -->
-          <div class="row">
-      
-            <!-- Grid column -->
-            <div class="col-md-6 mt-md-0 mt-3">
-      
-              <!-- Content -->
-              <h5 class="text-uppercase font-weight-bold white">Qualidade</h5>
-              <p class="white">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-      
-            </div>
-            <!-- Grid column -->
-      
-            <hr class="clearfix w-100 d-md-none pb-3">
-      
-            <!-- Grid column -->
-            <div class="col-md-6 mb-md-0 mb-3">
-      
-              <!-- Content -->
-              <h5 class="text-uppercase font-weight-bold white">Satisfação</h5>
-              <p class="white">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-      
-            </div>
-            <!-- Grid column -->
-      
-          </div>
-          <!-- Grid row -->
-      
+        <div>
+            <br>
+            <h1 class="centro">Carrinho de Compras</h1>
+            <br>
         </div>
-        <!-- Footer Text -->
-      
-        
-      
-      </footer>
-      <!-- Footer -->
+
+        <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th></th>
+                        <th>PRODUTO</th>
+                        <th>MARCA</th>
+                        <th>VALOR</th>
+                        <th>ESTOQUE</th>
+                        <th>Quantidade</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+        <% dados.forEach(function(dado){ %>
+            
+            <tr>
+                <td><img src='<%= "/"+ dado.img %>' class="fototabela"></td>
+                <td><%= dado.nomeproduto %></td>
+                <td><%= dado.fabricante %></td>
+                
+                <td><span value="<%= dado.preco%>" class="badge badge-secondary aumentaP">R$ <span class="preco"><%= dado.preco%></span>,00</span></td>
+                <td><span title="quantidade em estoque." class="badge badge-secondary aumentaP largura"> <%= dado.quantidade %></span></td>
+                <td> <input class="form-control tamInput qtd produto" min="1" max="<%= dado.quantidade %>" type="number" value="1" autofocus> </td>
+                <td><a href="/excluirProdutoCarrinho/<%= dado._id %>" class="btn btn-sm btn-danger">Excluir</a></td>
+            </tr>
+
+        <% }) %>
+            <tr>
+                <td></td>
+                <td></td>
+                <td><h3>VALOR:</h3> </td>
+                <td><span  class=" badge badge-secondary aumentaP">R$ <span id="totalPagar"></span>  ,00</span></td>
+                <td><a href="" class="btn btn-success">Pagar</a></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    </main>
   </body>
+
+
+<script>
+
+    $(document).ready(function(){
+
+        $(document).ready(function(){
+            var produtos_precos = document.getElementsByClassName('preco');
+            var produtos_qtd    = document.getElementsByClassName('qtd');
+            
+            var somatotal = 0;
+
+            for(let i=0 ; i<produtos_precos.length ; i++){
+                somatotal += (produtos_precos[i].textContent * produtos_qtd[i].value);
+            }
+
+            $("#totalPagar").html(somatotal);
+        })
+
+        $(".produto").click(function(){
+
+            var produtos_precos = document.getElementsByClassName('preco');
+            var produtos_qtd    = document.getElementsByClassName('qtd');
+            
+            var somatotal = 0;
+
+            for(let i=0 ; i<produtos_precos.length ; i++){
+                somatotal += (produtos_precos[i].textContent * produtos_qtd[i].value);
+            }
+
+            $("#totalPagar").html(somatotal);
+
+        })
+    });
+
+
+</script>
+
 </html>
