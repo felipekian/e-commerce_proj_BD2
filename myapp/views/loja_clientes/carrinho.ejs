@@ -14,7 +14,8 @@
     <link rel="icon" type="imagem/png" href="/images/animated_favicon1.gif" />
 
     <!-- JQuery, popper e bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="/javascripts/jquery.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     
@@ -111,6 +112,10 @@
             <h1 class="centro">Carrinho de Compras</h1>
             <br>
         </div>
+        <div>
+            <h4 class="centro alert alert-success" id="MSG"></h4>
+            <br>
+        </div>
 
         <table class="table table-hover">
                 <thead class="thead-dark">
@@ -133,10 +138,14 @@
                 <td><%= dado.nomeproduto %></td>
                 <td><%= dado.fabricante %></td>
                 
-                <td><span value="<%= dado.preco%>" class="badge badge-secondary aumentaP">R$ <span class="preco"><%= dado.preco%></span>,00</span></td>
-                <td><span title="quantidade em estoque." class="badge badge-secondary aumentaP largura"> <%= dado.quantidade %></span></td>
-                <td> <input class="form-control tamInput qtd produto" min="1" max="<%= dado.quantidade %>" type="number" value="1" autofocus> </td>
+                <td><span class="badge badge-secondary aumentaP">R$ <span id="<%= dado._id %>" class="preco"><%= dado.preco%></span>,00</span></td>
+                
+                <td><span  title="quantidade em estoque." class="badge badge-secondary aumentaP largura"> <%= dado.quantidade %></span></td>
+                
+                <td><input class="form-control tamInput qtd produto" min="1" max="<%= dado.quantidade %>" type="number" value="1" autofocus> </td>
+                
                 <td><a href="/excluirProdutoCarrinho/<%= dado._id %>" class="btn btn-sm btn-danger">Excluir</a></td>
+                
             </tr>
 
         <% }) %>
@@ -145,7 +154,7 @@
                 <td></td>
                 <td><h3>VALOR:</h3> </td>
                 <td><span  class=" badge badge-secondary aumentaP">R$ <span id="totalPagar"></span>  ,00</span></td>
-                <td><a href="" class="btn btn-success">Pagar</a></td>
+                <td><button onclick="comprarProdutos()" class="btn btn-success">Pagar</button></td>
                 <td></td>
                 <td></td>
             </tr>
@@ -156,6 +165,8 @@
 
 
 <script>
+
+    
 
     $(document).ready(function(){
 
@@ -188,6 +199,48 @@
         })
     });
 
+    function comprarProdutos(){
+        
+        var produtos_precos = document.getElementsByClassName('preco');
+        var produtos_qtd    = document.getElementsByClassName('qtd');
+
+        var produtos = []
+
+        for(let i=0 ;i<produtos_precos.length; i++){
+            
+            var produto = {
+                'id' : produtos_precos[i].id,
+                'valor' : produtos_precos[i].textContent,
+                'qtd' : produtos_qtd[i].value
+            }
+
+            produtos.push(produto)
+        }
+        
+        var lista = {}
+        lista.produtos = produtos
+        console.log(lista)
+
+        //agora enviar para a rota com ajax e cadastrar no banco a compra e remover do carrinho os produtos comprados
+
+        $.ajax({
+            type:"post",
+            url:"/registrarCompra",
+            data: lista
+        }).done(function(e){
+            $('#MSG').show()
+            $('#MSG').html("Comprado com Sucesso! Muito Obrigado(a)!")
+            setInterval(function(e){
+                window.location.href = "/";
+            }, 3000)
+        })
+
+
+    }
+
+    $(document).ready(function(e){
+        $('#MSG').hide()
+    })
 
 </script>
 

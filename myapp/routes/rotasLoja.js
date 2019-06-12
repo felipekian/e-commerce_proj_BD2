@@ -207,6 +207,19 @@ router.get('/salvarcarrinho/:id', function(req, res, next) {
 
 
 /* POST's */
+
+router.post('/registrarCompra', (req, res, next) => {    
+
+    let dados = req.body;
+    dados.clienteID = req.session['clienteID']
+    console.log("\n\n\nCHEGOU NO SERVIDOR: ")
+    console.log(dados)
+    console.log("\n\n\n")
+
+    res.send('OK')
+})
+
+
 router.post('/cadastrarCliente', (req, res, next) => {
 
     console.log(req.body)

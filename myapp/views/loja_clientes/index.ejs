@@ -14,13 +14,16 @@
     <link rel="icon" type="imagem/png" href="/images/animated_favicon1.gif" />
 
     <!-- JQuery, popper e bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="/javascripts/jquery.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     
 
     <!-- CSS Externo e boostrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
     <link rel='stylesheet' href='/stylesheets/style.css' />
 
     <!-- Fonte do google fonts - Roboto -->
@@ -103,10 +106,7 @@
                 <% } %>
               </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-            </form>
+            
           </div>
       </nav>
     </header>
@@ -116,10 +116,15 @@
         <h2 class="centro"> Produtos </h2>
         <br>
 
+        
+
         <% if(produtos[0] != undefined && sinal == 0 ){ %>
         
             <div class="container col-sm-2 col-md-2 col-lg-3 col-xl-3"></div>
             <div class="container col-sm-8 col-md-8 col-lg-6 col-xl-6" > 
+                
+                <h4 class="alert alert-success centro mensagemInsercao"></h4>
+                <br>
 
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
@@ -130,9 +135,12 @@
                                     <img class="d-block w-100 imgcarrossel" src='<%= dado.img %>' >
 
                                     <h3 class="caption centro"> <%= dado.nomeproduto %> </h3>
-                                    <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><a href="/salvarcarrinho/<%=dado._id%>" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></a></p>
+                                    
+                                    <!--
+                                        <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><a href="/salvarcarrinho/<%=dado._id%>" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></a></p>
+                                    -->
+                                    <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></button></p>
                                         
-                                   
                                 </div>
                                 
                                 <% ok = 0 %>
@@ -141,10 +149,12 @@
                                         <img class="d-block w-100 imgcarrossel" src='<%= dado.img %>' >
 
                                     <h3 class="caption centro"> <%= dado.nomeproduto %> </h3>
+                                    <!--
                                     <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><a href="/salvarcarrinho/<%=dado._id%>" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></a></p>
-                                        
-                                       
-                                    </div>
+                                    -->
+                                    
+                                    <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></button></p>
+                                </div>
                                 
                             <% } %>
                         <% }) %>
@@ -163,7 +173,16 @@
             <div class="containercol-sm-2 col-md-2 col-lg-3 col-xl-3"></div>
 
         <% } else if(produtos[0] != undefined && sinal == 1) { %>
+            <div class="row">
+                <div class="containercol-sm-2 col-md-2 col-lg-3 col-xl-3"></div>
+                <div class="containercol-sm-8 col-md-8 col-lg-6 col-xl-6">
+                    <!--ADD AQUI A MENSAGEM-->
+                    <h4 class="alert alert-success centro mensagemInsercao"></h4>
+                    <br>
+                </div>
             
+                <div class="containercol-sm-2 col-md-2 col-lg-3 col-xl-3"></div>
+            </div>
             <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
@@ -188,10 +207,14 @@
                     <td><span class=" badge badge-secondary aumentaP">R$ <%= dado.preco%>,00</span></td>
                     <td><span title="quantidade em estoque." class=" badge badge-secondary aumentaP largura"> <%= dado.quantidade %></span></td>
                     
-                    <td><a href="/salvarcarrinho/<%= dado._id %>" class="btn btn-md btn-success tamanhoBotao"> <img src="/images/shopping-cart.png" title="Adicionar produto no carrinho."> </a></td>
+                    <td><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success tamanhoBotao"> <img src="/images/shopping-cart.png" title="Adicionar produto no carrinho."> </button></td>
                 </tr>
 
-            <% }) %>            
+                <!--
+                    <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></button></p>
+                -->
+
+            <% }) %>
             </tbody>
         </table>
         
@@ -235,5 +258,29 @@
             </div>
             <!-- Footer Text -->
         </footer>
-  </body>
+    </body>
+
+
+    <script>
+        
+        $(document).ready(function(){
+            $('.mensagemInsercao').hide()
+        })
+
+
+        function adicionarNoCarrinho(produto){
+
+            $.ajax({
+                method:"GET",
+                url: "/salvarcarrinho/"+produto
+            }).done( function ( resp ) {
+                $('.mensagemInsercao').show()
+                $('.mensagemInsercao').html("Produto inserido no Carrinho!");
+                setInterval(function(){ $('.mensagemInsercao').hide(); }, 3000);
+            })
+        }
+    
+    </script>
+
+
 </html>
