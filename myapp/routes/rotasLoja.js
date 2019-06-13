@@ -111,6 +111,60 @@ router.get('/carrinho', (req, res, next) => {
 })
 
 
+router.get('/minhascompras', (req, res, next) => {
+    if ( req.session["usuario"] )
+    {
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("zettaByte");
+
+            var myquery = { "clienteID" : req.session["clienteID"] };
+
+            dbo.collection("compras").find(myquery).toArray(function(err, result) {
+              if (err) throw err;
+              
+              console.log("\n\nPRODUTOS COMPRADOS: ")
+              console.log(result)
+
+              res.render('./loja_clientes/minhascompras',{msg:req.session["usuario"],erros:{}, produtos:result});
+
+              
+              db.close();
+            });
+        });
+    }else
+        res.render('./loja_clientes/login', {msg:"", dados:{}, erros:{}});
+})
+
+router.get('/minhascompras/:id', (req, res, next) => {
+    if ( req.session["usuario"] )
+    {
+        
+        var id = new mongo.ObjectID(req.params.id);
+
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("zettaByte");
+
+            var myquery = { "_id" : id };
+
+            dbo.collection("compras").find(myquery).toArray(function(err, result) {
+              if (err) throw err;
+              
+              console.log("\n\nPRODUTOS DETALHES COMPRA: ")
+              console.log(result)
+
+              res.render('./loja_clientes/minhacompradetalhe',{msg:req.session["usuario"],erros:{}, produtos:result});
+
+              
+              db.close();
+            });
+        });
+    }else
+        res.render('./loja_clientes/login', {msg:"", dados:{}, erros:{}});
+})
+
+
 router.get('/excluirProdutoCarrinho/:id', function(req, res, next) {
 
     if( req.session["usuario"] ) {
@@ -211,12 +265,23 @@ router.get('/salvarcarrinho/:id', function(req, res, next) {
 router.post('/registrarCompra', (req, res, next) => {    
 
     let dados = req.body;
-    dados.clienteID = req.session['clienteID']
-    console.log("\n\n\nCHEGOU NO SERVIDOR: ")
-    console.log(dados)
-    console.log("\n\n\n")
+    dados.clienteID = req.session['clienteID'];
+    dados.enviado = false;
 
-    res.send('OK')
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("zettaByte");
+        dbo.collection("compras").insert( dados , function(err, result) {
+            
+            dbo.collection("carrinho").deleteMany( {'cliente_id' : req.session['clienteID']} , function(err, result) {
+                if (err) throw err;
+            
+                res.send('OK')
+                db.close();
+            });
+        });
+    });
+
 })
 
 

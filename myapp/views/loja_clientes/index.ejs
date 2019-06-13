@@ -92,19 +92,22 @@
                   </div>
                   <!-- fim da lista -->
                 </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/comparar_produtos">Comparar</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/carrinho">Carrinho</a>
-              </li>
-              <li class="nav-item">
-                <% if(msg != "") {%>
-                    <a class="nav-link text-success" href="/logout">Logout - <%= msg %></a>
-                <% } else {%>
-                    <a class="nav-link" href="/login">Login</a>
-                <% } %>
-              </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/comparar_produtos">Comparar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/carrinho">Carrinho</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/minhascompras">Minhas Compras</a>
+                </li>
+                <li class="nav-item">
+                    <% if(msg != "") {%>
+                        <a class="nav-link text-success" href="/logout">Logout - <%= msg %></a>
+                    <% } else {%>
+                        <a class="nav-link" href="/login">Login</a>
+                    <% } %>
+                </li>
             </ul>
             
           </div>
