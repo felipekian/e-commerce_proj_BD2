@@ -69,7 +69,46 @@
     </header>
     <main>
     
-    <h1>HOME admin</h1>
+        <div>
+            <br>
+            <h2 class="centro">Pedidos</h2>
+            <br>
+        </div>
+
+        <% if( pedidos[0] != undefined ){ %>
+            
+            <table class="table">
+                <thead class="thead thead-dark">
+                    <tr>
+                        <th></th>
+                        <th>CÓDIGO</th>
+                        <th>CLIENTE</th>                        
+                        <th>STATUS</th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <% pedidos.forEach(function(dado){ %>
+                        <tr class="alert alert-danger">
+                            <td></td>
+                            <td><%= dado._id %></td>
+                            <td><%= dado.clienteID %></td>                            
+                            <% if(!dado.status){ %>
+                                <td>Não Postado</td>
+                            <% } %>
+                            <td><a href="#" class="btn btn-success">Produto Postado</a> </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+
+            
+
+        <% } else { %>
+            <br><br><br>
+            <h2 class="centro alert alert-warning"> Nenhum Pedido Para Ser Enviado </h2>
+        <% } %>
     
     
     

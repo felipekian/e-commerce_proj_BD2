@@ -24,7 +24,7 @@ const upload = multer({ storage });
 /* GET's */
 router.get('/', function(req, res, next) {
     if(req.session["usuario"])
-        res.render('./loja_admin/home', {msg:req.session["usuario"]});
+        res.redirect('/home');
     else
         res.render('./loja_admin/index', {msg:"", erros:{}, dados:{}});
 });
@@ -38,8 +38,23 @@ router.get('/adminrecuperar', function(req, res, next) {
 });
 
 router.get('/home', function(req, res, next) {
-    if(req.session["usuario"])
-        res.render('./loja_admin/home',{msg:req.session["usuario"]});
+    if(req.session["usuario"]){
+
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("zettaByte");
+
+            dbo.collection("compras").find({}).toArray(function(err, result) {
+                if (err) throw err;
+              
+                console.log("\n\n\nDADOS: "+result)
+
+                res.render('./loja_admin/home',{msg:req.session["usuario"], pedidos:result});
+
+                db.close();
+            });
+        });
+    }
     else
         res.render('./loja_admin/index', {msg:"", erros:{}, dados:{}});
 });
@@ -329,7 +344,8 @@ router.post('/validarLogin', (req, res, next) => {
             req.session["funcionarioID"] = results[0].funcionarioID;
 
             console.log("Deu muito BOM")
-            res.render("./loja_admin/home", {msg:results[0].usuario})
+            res.redirect('/admin/home');
+            //res.render("./loja_admin/home", {msg:results[0].usuario})
             return
         }
         else
