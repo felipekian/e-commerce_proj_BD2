@@ -62,10 +62,7 @@
             </li>
             
             </ul>
-            <form class="form-inline my-2 my-lg-0" method="GET" action="">
-              <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar Cliente" aria-label="Pesquisar">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-            </form>
+            
           </div>
       </nav>
     </header>
@@ -84,9 +81,9 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Cidade</th>
-                            <th scope="col">Compras</th>
+                            <th scope="col">NOME</th>
+                            <th scope="col">CIDADE</th>
+                            <th scope="col"></th>
                             <!--<th scope="col">Atualizar</th>
                             <th scope="col">Deletar</th>-->
                         </tr>
@@ -97,10 +94,7 @@
                             <td scope="row"><%= dados[i].clienteID %></td>
                             <td><%= dados[i].nomecompleto %></td>
                             <td><%= dados[i].cidade %></td>
-                            <td> <a href="/admin/compra/<%= dados[i].clienteID %> "><button class="btn btn-sm btn-primary">Compras</button></a> </td>
-                            
-                            <!--<td> <a href=" /admin/atualizardados/:<%=dados[i].clienteID %>"><button class="btn btn-sm btn-warning">Atualizar</button></a> </td>
-                            <td> <a href=" /admin/deletardados/:<%=dados[i].clienteID %>"><button class="btn btn-sm btn-danger">Deletar</button></a></td>-->
+                            <td> <a href="/admin/compra/<%=dados[i].clienteID%> "><button class="btn btn-sm btn-primary">Compras</button></a> </td>
                         </tr>
                     <% } %>
                 </tbody>

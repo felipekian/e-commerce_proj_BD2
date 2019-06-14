@@ -24,10 +24,33 @@ const upload = multer({ storage });
 /* GET's */
 router.get('/', function(req, res, next) {
     if(req.session["usuario"])
-        res.redirect('/home');
+        res.redirect('/admin/home');
     else
         res.render('./loja_admin/index', {msg:"", erros:{}, dados:{}});
 });
+
+router.get('/postado/:id', function(req, res, next){
+
+    if(req.session["usuario"]){
+
+        var id = new mongo.ObjectID(req.params.id);
+
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("zettaByte");
+            var myquery = { _id : id };
+            var newvalues = { $set: { 'enviado' : true} };
+            dbo.collection("compras").updateOne(myquery, newvalues, function(err, res) {
+              if (err) throw err;
+              console.log("1 document updated");
+              
+              db.close();
+            });
+        });
+        res.send("OK, Chegou")
+    }else
+        res.render('./loja_admin/index', {msg:"", erros:{}, dados:{}});
+})
 
 router.get('/admincadastro', function(req, res, next) {    
     res.render('./loja_admin/cadastro', {msg:req.session["usuario"],dados:{},erros:{}});    
@@ -44,7 +67,7 @@ router.get('/home', function(req, res, next) {
             if (err) throw err;
             var dbo = db.db("zettaByte");
 
-            dbo.collection("compras").find({}).toArray(function(err, result) {
+            dbo.collection("compras").find({enviado:false}).toArray(function(err, result) {
                 if (err) throw err;
               
                 console.log("\n\n\nDADOS: "+result)
@@ -175,7 +198,7 @@ router.get("/atualizarproduto/:id", function(req, res, next) {
 
                     db.close();
                 });
-            });
+        });
         
     }
     else
@@ -186,7 +209,19 @@ router.get("/compra/:id", function(req, res, next){
 
     console.log(req.params.id);
 
-    res.send("FALTA VERIFICAR NO BANCO E FAZER TELA DE DETALHE DA COMPRA")
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+            var dbo = db.db("zettaByte");
+            dbo.collection("compras").find({'clienteID' : parseInt(req.params.id) }).toArray(function(err, result) {
+                if (err) throw err;
+                
+                res.render('./loja_admin/detalhesCompras',{msg:req.session["usuario"],erros:{}, pedidos:result});
+                
+                console.log(result);
+                db.close();
+            });
+    });
+
 })
 
 
