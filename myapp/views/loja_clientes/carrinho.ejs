@@ -216,9 +216,9 @@
 
             produtos.push(produto)
         }
-        
         var lista = {}
         lista.produtos = produtos
+
         console.log(lista)
 
         //agora enviar para a rota com ajax e cadastrar no banco a compra e remover do carrinho os produtos comprados
@@ -232,7 +232,7 @@
             $('#MSG').html("Comprado com Sucesso! Muito Obrigado(a)!")
             setInterval(function(e){
                 window.location.href = "/";
-            }, 3000)
+            }, 10000)
         })
 
 

@@ -50,7 +50,6 @@
             width: 65px;
         }
 
-        
 
     </style>
 
@@ -122,7 +121,7 @@
         
 
         <% if(produtos[0] != undefined && sinal == 0 ){ %>
-        
+            <div class="row">
             <div class="container col-sm-2 col-md-2 col-lg-3 col-xl-3"></div>
             <div class="container col-sm-8 col-md-8 col-lg-6 col-xl-6" > 
                 
@@ -174,6 +173,56 @@
                 </div>
             </div>
             <div class="containercol-sm-2 col-md-2 col-lg-3 col-xl-3"></div>
+        </div>
+
+        <br> <br> <br>
+
+        <div class="row">
+            <!-- Colocar o restante dos produtos com esse template -->
+            <% totalProdutos = 12 %>
+            <% var valores = [] %>
+            <%for (let i=0; i<totalProdutos ; i++){ %>
+                <% while(true){ %>
+                    <% let valor = Math.floor(Math.random() * 44) %>
+                    <% if(!(valor in valores)){ %>
+                        <% valores.push(valor) %>
+                        <% break %>
+                    <% } %>
+                <% } %>
+            <% } %>
+
+            <% for(let i=0 ; i<totalProdutos ; i++){ %>
+                <% let produto = [] %>
+                <% produto.push(produtos[valores[i]]) %>
+                <% produto.forEach(function(dado){ %>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100">
+                        <img class="card-img-top" src="<%= dado.img %>" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">
+                            <p ><%= dado.nomeproduto %></p>
+                            </h4>
+                            <p class="card-text"><%= dado.descricao %></p>
+                            <h3><span class="badge badge-secondary aumentaQ"> R$ <%=dado.preco %>,00 </span><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></button></h3>
+
+                            
+                            
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9733;</small>
+                        </div>
+                        </div>
+                    </div>
+                <% }) %>
+              <% } %>
+            </div>
+
+
+
+
+
+
+
 
         <% } else if(produtos[0] != undefined && sinal == 1) { %>
             <div class="row">
@@ -220,7 +269,6 @@
             <% }) %>
             </tbody>
         </table>
-        
         <% } %>
     </main>
     
