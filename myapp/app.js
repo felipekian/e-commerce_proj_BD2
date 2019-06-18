@@ -7,16 +7,33 @@ var logger = require('morgan');
 var expressvalidator = require('express-validator');
 const session = require('express-session');
 
-
+var app = express();
+//var server = require('http').createServer(app);
+var io = require('socket.io')(3001);
 
 var rotasAdmin = require('./routes/rotasAdmin');
 var rotasLoja = require('./routes/rotasLoja');
 
-var app = express();
+
+//SOCKET
+let messages = []
+
+io.on('connection', (socket) => {
+    console.log(`Socket Conectado: ${socket.id}`);
+
+    socket.on('sendMessage', data => {
+        messages.push(data);
+        socket.broadcast.emit('receivedMessage', data);
+    })
+})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+
+
+
 
 
 app.use(session({
@@ -38,6 +55,9 @@ app.use(session({
     saveUninitialized: false
   }))
 
+
+
+
 // rotas da aplicação
 app.use('/', rotasLoja);
 app.use('/admin', rotasAdmin);
@@ -58,5 +78,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 module.exports = app;

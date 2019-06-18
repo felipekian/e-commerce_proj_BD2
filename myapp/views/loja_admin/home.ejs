@@ -74,7 +74,7 @@
         </div>
 
         <div>
-            <h3 class="centro MSG"></h3>
+            <h3 class="centro MSG alert alert-success"></h3>
             <br>
         </div>
 
@@ -131,8 +131,6 @@
             url:'/admin/postado/'+id
         }).done(function(e){
 
-            alert('Enviado: '+e);
-            
             $('#'+id).hide()
             $(".MSG").show()
             $(".MSG").html("Produto Postado")

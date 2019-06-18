@@ -42,6 +42,13 @@ router.get('/login', (req, res, next) => {
         res.render('./loja_clientes/login', {msg:"", dados:{}, erros:{}});
 })
 
+router.get('/chat', (req, res, next) => {
+    if ( req.session["usuario"] )
+        res.render('./loja_clientes/chat',{msg:req.session["usuario"],erros:{}, dados:{}});
+    else
+        res.render('./loja_clientes/login', {msg:"", dados:{}, erros:{}});
+})
+
 router.get('/cadastrar_cliente', (req, res, next) => {
     res.render('./loja_clientes/cadastro_clientes', {msg : "", erros:{}, dados:{}});
 })
