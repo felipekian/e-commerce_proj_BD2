@@ -135,12 +135,13 @@
                     <% if(dado.enviado){ %>
                         <tr class="alert alert-success">
                             <td></td>
-                            <td ><h5><%= dado._id %></h5></td>
-                            <td ><h5 title="Em breve você receverá seus produtos em sua residência!">ENVIADO</h5></td>                        
+                            <td ><h5><%= dado._id %></h5></td>                            
+                            <td ><h5 title="Em breve você receverá seus produtos em sua residência!">ENVIADO</h5></td>
                     <% } else { %>
                         <tr class="alert alert-danger">
                             <td></td>
                             <td ><h5><%= dado._id %></h5></td>
+                            
                             <td ><h5 title="Em breve você receverá a confirmação do envio!">NÃO ENVIADO</h5></td>                        
                     <% } %>
 

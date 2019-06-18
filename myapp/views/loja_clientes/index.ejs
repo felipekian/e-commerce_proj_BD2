@@ -50,6 +50,10 @@
             width: 65px;
         }
 
+        .imgConfig{
+            max-width: 300px;
+            max-height: 300px;
+        }
 
     </style>
 
@@ -141,7 +145,9 @@
                                     <!--
                                         <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><a href="/salvarcarrinho/<%=dado._id%>" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></a></p>
                                     -->
-                                    <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></button></p>
+                                    <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></button> <a class="centro btn btn-primary" href="/detalheproduto/<%= dado._id %>">Detalhe</a> </p>
+                                    
+                                    
                                         
                                 </div>
                                 
@@ -155,7 +161,7 @@
                                     <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><a href="/salvarcarrinho/<%=dado._id%>" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></a></p>
                                     -->
                                     
-                                    <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></button></p>
+                                    <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></button> <a class="centro btn btn-primary" href="/detalheproduto/<%= dado._id %>">Detalhe</a></p>
                                 </div>
                                 
                             <% } %>
@@ -197,13 +203,13 @@
                 <% produto.forEach(function(dado){ %>
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                        <img class="card-img-top" src="<%= dado.img %>" alt="">
+                        <img class="card-img-top imgConfig" src="<%= dado.img %>" alt="">
                         <div class="card-body">
                             <h4 class="card-title">
                             <p ><%= dado.nomeproduto %></p>
                             </h4>
                             <p class="card-text"><%= dado.descricao %></p>
-                            <h3><span class="badge badge-secondary aumentaQ"> R$ <%=dado.preco %>,00 </span><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></button></h3>
+                            <h3><span class="badge badge-secondary aumentaQ"> R$ <%=dado.preco %>,00 </span><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></button> <a class="centro btn btn-primary" href="/detalheproduto/<%= dado._id %>">Detalhe</a></h3>
 
                             
                             
@@ -245,6 +251,7 @@
                             <th>VALOR</th>
                             <th>ESTOQUE</th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -259,7 +266,8 @@
                     <td><span class=" badge badge-secondary aumentaP">R$ <%= dado.preco%>,00</span></td>
                     <td><span title="quantidade em estoque." class=" badge badge-secondary aumentaP largura"> <%= dado.quantidade %></span></td>
                     
-                    <td><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success tamanhoBotao"> <img src="/images/shopping-cart.png" title="Adicionar produto no carrinho."> </button></td>
+                    <td><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success tamanhoBotao"> <img src="/images/shopping-cart.png" title="Adicionar produto no carrinho."> </button> </td>
+                    <td><a class="centro btn btn-primary" href="/detalheproduto/<%= dado._id %>">Detalhe</a></td>
                 </tr>
 
                 <!--

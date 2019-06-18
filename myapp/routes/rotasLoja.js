@@ -259,6 +259,31 @@ router.get('/salvarcarrinho/:id', function(req, res, next) {
     }
 })
 
+router.get('/detalheproduto/:id', function(req, res, next) {
+    if ( req.session["usuario"] ){
+
+        let ID = req.params.id;
+         var o_id = new mongo.ObjectID(ID);
+
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+                var dbo = db.db("zettaByte");
+                dbo.collection("produtos").find({"_id" : o_id}).toArray(function(err, result) {
+                    if (err) throw err;
+                    
+                    res.render('./loja_clientes/detalheproduto',{msg:req.session["usuario"],erros:{},dados:result});
+                    
+                    console.log(result);
+
+                    db.close();
+                });
+        });
+    } 
+    else {
+        res.render('./loja_clientes/login',{msg:"",erros:{}, dados:{}});
+    }
+})
+
 
 /* POST's */
 

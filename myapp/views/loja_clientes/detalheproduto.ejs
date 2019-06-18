@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+  <head>
+
+    <!-- Titulo da loja -->
+    <title> Zetta-Byte Shopping - Detalhe Produto</title>
+
+    <!-- configurações de linguagem -->
+    <meta http-equiv="Content-Language" content="pt-br">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+    <!-- icone do titulo -->
+    <link rel="icon" type="imagem/png" href="/images/animated_favicon1.gif" />
+
+    <!-- JQuery, popper e bootstrap JS -->
+    <script src="/javascripts/jquery.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    
+
+    <!-- CSS Externo e boostrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <!-- Fonte do google fonts - Roboto -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+    <style>
+        #foto{
+            margin-bottom: 30px;
+        }
+
+        #data{
+            margin-bottom: 30px;
+        }
+
+    </style>
+    
+  </head>
+  
+  <body>
+    <header>
+        <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+            
+          <a class="navbar-brand" href="/"><img src="/images/bootstrap-solid.svg" width="30" height="30" alt=""> Zetta-Byte</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+          <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(página atual)</span></a>
+              </li>              
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Produtos
+                  </a>
+                  <!-- Aqui adiciona as lista de produtos  -->
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/produto/gabinete">Gabinetes</a>
+                    <a class="dropdown-item" href="/produto/cooler">Coolers</a>
+                    <a class="dropdown-item" href="/produto/monitor">Monitores</a>
+                    <a class="dropdown-item" href="/produto/mouse">Mouses</a>
+                    <a class="dropdown-item" href="/produto/teclado">Teclados</a>
+                    <a class="dropdown-item" href="/produto/hd">HDs</a>
+                    <a class="dropdown-item" href="/produto/ssd">SSDs</a>
+                    <a class="dropdown-item" href="/produto/processador">Processadores</a>
+                    <a class="dropdown-item" href="/produto/Memoria ">Memória</a>
+                    <a class="dropdown-item" href="/produto/placamae">Placas mãe</a>
+                    <a class="dropdown-item" href="/produto/placavideo">Placas de vídeo</a>
+                    <a class="dropdown-item" href="/produto/headset">Headsets</a>
+                  </div>
+                  <!-- fim da lista -->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/comparar_produtos">Comparar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/carrinho">Carrinho</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/minhascompras">Minhas Compras</a>
+                </li>
+                <li class="nav-item">
+                    <% if(msg != "") {%>
+                        <a class="nav-link text-success" href="/logout">Logout - <%= msg %></a>
+                    <% } else {%>
+                        <a class="nav-link" href="/login">Login</a>
+                    <% } %>
+                </li>
+            </ul>
+          </div>
+      </nav>
+    </header>
+    <main>
+
+        <div >
+            <br>
+            <h3 class="centro">Detalhes</h3>
+            <br>
+            <h4 class="alert alert-success centro mensagemInsercao"></h4>
+            <br>
+        </div>
+
+        <div class="row">
+        <% dados.forEach(function(dado){ %>
+            <div class=" container col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+            <div id="foto" class=" container col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                
+                <img class="img-thumbnail  img-fluid imgdetalhe" src='/<%= dado.img %>' alt="foto produto">            
+                
+            </div>
+            <div class=" container col-sm-5 col-md-5 col-lg-5 col-xl-5" id="data">
+                
+                <dl>
+                    <dt> <b> Nome do produto:</b> </dt><dd><%= dado.nomeproduto %></dd>
+                    
+                    <dt> <b> Marca: </b></dt><dd><%= dado.fabricante %></dd>
+                
+                    <dt><b> Tipo de produto:</b></dt> <dd><%= dado.tipo %> </dd>
+                
+                    <dt><b> Preço:</b></dt> <dd>R$<%= dado.preco %>,00</dd> 
+                
+                    <dt><b> Quantidade Disponível: </b></dt> <dd><%= dado.quantidade %> unid</dd>
+                
+                    <dt><b> descrição do produto: </b></dt> <dd><%= dado.descricao%></dd>
+                    
+                </dl>
+                <button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success tamanhoBotao"> <img src="/images/shopping-cart.png" title="Adicionar produto no carrinho."> </button>
+                
+            </div>
+        <% }) %>
+        <div class=" container col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+        </div>
+        <br>
+        
+    </main>
+    <!-- Footer -->
+    <footer id="footer" class="page-footer font-small teal pt-4 bg-dark navbar-fixed-bottom ">
+
+            <!-- Footer Text -->
+            <div class="container-fluid text-center text-md-left">
+            
+                <!-- Grid row -->
+                <div class="row">
+            
+                <!-- Grid column -->
+                <div class="col-md-6 mt-md-0 mt-3">
+            
+                    <!-- Content -->
+                    <h5 class="text-uppercase font-weight-bold white">Qualidade</h5>
+                    <p class="white">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+            
+                </div>
+                <!-- Grid column -->
+            
+                <hr class="clearfix w-100 d-md-none pb-3">
+            
+                <!-- Grid column -->
+                <div class="col-md-6 mb-md-0 mb-3">
+            
+                    <!-- Content -->
+                    <h5 class="text-uppercase font-weight-bold white">Satisfação</h5>
+                    <p class="white">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+            
+                </div>
+                <!-- Grid column -->
+            
+                </div>
+                <!-- Grid row -->
+            
+            </div>
+            <!-- Footer Text -->
+        </footer>
+  </body>
+  <script>
+        
+    $(document).ready(function(){
+        $('.mensagemInsercao').hide()
+    })
+
+
+    function adicionarNoCarrinho(produto){
+
+        $.ajax({
+            method:"GET",
+            url: "/salvarcarrinho/"+produto
+        }).done( function ( resp ) {
+            $('.mensagemInsercao').show()
+            $('.mensagemInsercao').html("Produto inserido no Carrinho!");
+            setInterval(function(){ $('.mensagemInsercao').hide(); }, 3000);
+        })
+    }
+
+</script>
+</html>
