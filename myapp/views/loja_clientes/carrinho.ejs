@@ -110,7 +110,7 @@
         <div>
             <br>
             <h1 class="centro">Carrinho de Compras</h1>
-            <br>
+            
         </div>
         <div>
             <h4 class="centro alert alert-success" id="MSG"></h4>
@@ -149,6 +149,7 @@
             </tr>
 
         <% }) %>
+            
             <tr>
                 <td></td>
                 <td></td>
@@ -160,15 +161,74 @@
             </tr>
         </tbody>
     </table>
+
+   
+    <div class="row">
+
+        <div class="container col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+        <div class="container col-sm-3 col-md-3 col-lg-3 col-xl-3">
+            <div class="form-group">
+                <input type="text" id="cep" class="form-control" placeholder="Ex.: 69307000">
+            </div>
+            <div class="">
+                <input type="button" onclick="calcularFrete()" class="btn btn-success" value="Calcular Frete">
+            </div>
+        </div>
+        <div class="container col-sm-7 col-md-7 col-lg-7 col-xl-7">
+            <!-- Fazer a mostragem do resultado -->
+            <h5 class="centro" id="tituloTransportadora">Transportadora Araújo</h5>
+            <table class="table" id="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>TIPO</th>
+                        <th>TEMPO</th>
+                        <th>VALOR</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyFrete">
+                    
+                </tbody>
+            </table>
+        </div>
+        <div class="container col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+    </div>
+
     </main>
+    <br><br>
   </body>
 
 
 <script>
 
-    
+    function calcularFrete(){
+        var cep = $("#cep").val();
+
+        $.ajax({
+            type:"GET",
+            url:"http://localhost:4000/"+cep                        
+        }).done(function(data){            
+            console.log(data)
+
+            
+            $('#table').show();
+            $('#tituloTransportadora').show();
+
+            $('#rapido').remove();
+            $('#lento').remove();
+            
+
+            var freteRapido = "<tr id='rapido'><td>Express</td><td>"+data.rapido.tempo+"</td><td>"+data.rapido.valor+"</td></tr>";
+
+            var freteLento = "<tr id='lento'><td>Normal</td><td>"+data.lento.tempo+"</td><td>"+data.lento.valor+"</td></tr>";
+
+            $('#tbodyFrete').append(freteRapido);
+            $('#tbodyFrete').append(freteLento);
+
+        })
+    }
 
     $(document).ready(function(){
+
 
         $(document).ready(function(){
             var produtos_precos = document.getElementsByClassName('preco');
@@ -204,8 +264,8 @@
         var produtos_precos = document.getElementsByClassName('preco');
         var produtos_qtd    = document.getElementsByClassName('qtd');
 
+        /*
         var produtos = []
-
         for(let i=0 ;i<produtos_precos.length; i++){
             
             var produto = {
@@ -218,6 +278,21 @@
         }
         var lista = {}
         lista.produtos = produtos
+        */
+
+        var produtos = []
+        for(let i=0 ;i<produtos_precos.length; i++){
+            
+            var produto = {
+                'id' : produtos_precos[i].id,
+                'valor' : produtos_precos[i].textContent,
+                'qtd' : produtos_qtd[i].value
+            }
+
+            produtos.push(produto)
+        }
+        var lista = {}
+        lista.produtos = JSON.stringify(produtos);
 
         console.log(lista)
 
@@ -240,7 +315,10 @@
 
     $(document).ready(function(e){
         $('#MSG').hide()
+        $('#table').hide();
+        $('#tituloTransportadora').hide();
     })
+
 
 </script>
 

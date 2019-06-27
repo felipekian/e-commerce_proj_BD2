@@ -126,6 +126,7 @@
                 <tr>
                     <th></th>
                     <th>CÓDIGO_ID</th>
+                    <th>PRODUTOS</th>
                     <th>STATUS</th>
                     <th></th>
                 </tr>
@@ -135,16 +136,17 @@
                     <% if(dado.enviado){ %>
                         <tr class="alert alert-success">
                             <td></td>
-                            <td ><h5><%= dado._id %></h5></td>                            
+                            <td ><h5><%= dado._id %></h5></td>
+                            <td> <%= dado.produtos %></td>
                             <td ><h5 title="Em breve você receverá seus produtos em sua residência!">ENVIADO</h5></td>
                     <% } else { %>
                         <tr class="alert alert-danger">
                             <td></td>
                             <td ><h5><%= dado._id %></h5></td>
-                            
-                            <td ><h5 title="Em breve você receverá a confirmação do envio!">NÃO ENVIADO</h5></td>                        
+                            <td> <%= dado.produtos %></td>
+                            <td ><h5 title="Em breve você receverá a confirmação do envio!">NÃO ENVIADO</h5></td>
                     <% } %>
-
+                        
                         <td> <a href="/minhascompras/<%= dado._id %>" class="btn btn-primary">Detalhes</a></td>
                     </tr>
 
