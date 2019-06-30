@@ -18,6 +18,14 @@
   },
   "homepage": "https://github.com/felipekian/e-commerce_proj_BD2#readme",
   "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "http": "0.0.0",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "multer": "^1.4.1",
+    "socket.io": "^2.2.0",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "express": "^4.16.4",
@@ -28,7 +36,6 @@
     "mongodb": "^3.2.6",
     "mongoose": "^5.5.11",
     "multer": "^1.4.1",
-    "mysql": "^2.17.1",
-    "socket.io": "^2.2.0"
+    "mysql": "^2.17.1"
   }
 }
