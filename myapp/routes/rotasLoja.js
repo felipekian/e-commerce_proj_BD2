@@ -252,11 +252,9 @@ router.get('/salvarcarrinho/:id', function(req, res, next) {
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
             var dbo = db.db("zettaByte");
-            dbo.collection("carrinho").insert( inserir , function(err, result) {
-                
+            dbo.collection("carrinho").insert( inserir , function(err, result) {                
                 res.redirect("/")
-                db.close();
-                    
+                db.close();                    
             });
         });
 
@@ -265,12 +263,12 @@ router.get('/salvarcarrinho/:id', function(req, res, next) {
         res.render('./loja_clientes/login',{msg:"",erros:{}, dados:{}});
     }
 })
-
+/*
 router.get('/detalheproduto/:id', function(req, res, next) {
     if ( req.session["usuario"] ){
 
         let ID = req.params.id;
-         var o_id = new mongo.ObjectID(ID);
+        var o_id = new mongo.ObjectID(ID);
 
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
@@ -284,6 +282,36 @@ router.get('/detalheproduto/:id', function(req, res, next) {
 
                     db.close();
                 });
+        });
+    } 
+    else {
+        res.render('./loja_clientes/login',{msg:"",erros:{}, dados:{}});
+    }
+})
+*/
+
+router.get('/detalheproduto/:id', function(req, res, next) {
+    if ( req.session["usuario"] ){
+
+        let ID = req.params.id;
+        var o_id = new mongo.ObjectID(ID);
+        var sugestao = {}
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("zettaByte");
+            
+            dbo.collection("produtos").find({}).toArray(function(err, result) {
+                if (err) throw err;
+                
+                sugestao = result;
+
+                dbo.collection("produtos").find({"_id" : o_id}).toArray(function(err, result) {
+                    if (err) throw err;
+                    
+                    res.render('./loja_clientes/detalheproduto',{msg:req.session["usuario"],erros:{},dados:result, sugestao:sugestao});
+                    db.close();
+                });
+            });
         });
     } 
     else {

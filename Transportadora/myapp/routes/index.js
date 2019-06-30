@@ -7,13 +7,10 @@ router.get('/:cep', function(req, res, next) {
 	var cep = req.params.cep;
 
 	var freteExpress = Math.floor(Math.random() * 100);
-	var tempoExpress = Math.floor(Math.random() * 6);
+	var freteLento   = Math.floor(Math.random() * 100);	
 
-	var freteLento   = Math.floor(Math.random() * 100);
-	var freteLento   = Math.floor(Math.random() * 30);
-
-	if(freteExpress == 0) {
-		freteLento++;
+	if(freteExpress < 30) {
+		freteExpress = 30;
 	}
 
 	if(freteLento < 15){
@@ -21,7 +18,7 @@ router.get('/:cep', function(req, res, next) {
 	}
 
 	var frete = {
-		"rapido" : {"valor":freteExpress, "tempo":5},
+		"rapido" : {"valor":freteExpress, "tempo":6},
 		"lento"  : {"valor":freteLento, "tempo":30},
 	}
 

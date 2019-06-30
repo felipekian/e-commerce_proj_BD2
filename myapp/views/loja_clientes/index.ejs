@@ -148,7 +148,7 @@
                                     <!--
                                         <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><a href="/salvarcarrinho/<%=dado._id%>" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></a></p>
                                     -->
-                                    <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></button> <a class="centro btn btn-primary" href="/detalheproduto/<%= dado._id %>">Detalhe</a> </p>
+                                    <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></button> <a class="centro btn btn-primary" href="/detalheproduto/<%= dado._id %>">Detalhe</a></p>
                                     
                                     
                                         
@@ -212,7 +212,7 @@
                             <p ><%= dado.nomeproduto %></p>
                             </h4>
                             <p class="card-text"><%= dado.descricao %></p>
-                            <h3><span class="badge badge-secondary aumentaQ"> R$ <%=dado.preco %>,00 </span><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></button> <a class="centro btn btn-primary" href="/detalheproduto/<%= dado._id %>">Detalhe</a></h3>
+                            <h3><span class="badge badge-secondary aumentaQ"> R$ <%=dado.preco %>,00 </span><div class="btn btn-group"><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></button> <a class="centro btn btn-primary" href="/detalheproduto/<%= dado._id %>">Detalhe</a></div></h3>
 
                             
                             
@@ -223,8 +223,8 @@
                         </div>
                     </div>
                 <% }) %>
-              <% } %>
-            </div>
+            <% } %>
+        </div>
 
 
 
@@ -328,8 +328,7 @@
         $(document).ready(function(){
             $('.mensagemInsercao').hide()
         })
-
-
+        
         function adicionarNoCarrinho(produto){
 
             $.ajax({

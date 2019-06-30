@@ -36,6 +36,26 @@
             margin-bottom: 30px;
         }
 
+        .aumentaP{
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .aumentaQ{
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        
+        .largura{
+            width: 65px;
+        }
+        
+        .imgConfig{
+            max-width: 300px;
+            max-height: 300px;
+        }
+
     </style>
     
   </head>
@@ -133,11 +153,54 @@
                 
             </div>
         <% }) %>
-        <div class=" container col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
+        <div class="container col-sm-1 col-md-1 col-lg-1 col-xl-1"></div>
         </div>
         <br>
+        <hr>
+        <br>
+        <h4 class="alert">Quem comprou o produto acima, também comprou:</h4>
+        <div class="row">
+
+            <!-- Colocar o restante dos produtos com esse template -->
+            <% totalProdutos = 3 %>
+            <% var valores = [] %>
+            <%for (let i=0; i<totalProdutos ; i++){ %>
+                <% while(true){ %>
+                    <% let valor = Math.floor(Math.random() * 40) %>
+                    <% if(!(valor in valores)){ %>
+                        <% valores.push(valor) %>
+                        <% break %>
+                    <% } %>
+                <% } %>
+            <% } %>
+            
+            <% for(let i=0 ; i<totalProdutos ; i++){ %>
+                <% let produto = [] %>
+                <% produto.push(sugestao[valores[i]]) %>
+                <% produto.forEach(function(dado){ %>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100">
+                        <img class="card-img-top imgConfig" src="/<%= dado.img %>" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">
+                            <p ><%= dado.nomeproduto %></p>
+                            </h4>
+                            <p class="card-text"><%= dado.descricao %></p>
+                            <h3><span class="badge badge-secondary aumentaQ"> R$ <%=dado.preco %>,00 </span><div class="btn btn-group"><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></button> <a class="centro btn btn-primary" href="/detalheproduto/<%= dado._id %>">Detalhe</a></div></h3>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9733;</small>
+                        </div>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } %>
+        </div>
         
     </main>
+
+    <br><br>
+
     <!-- Footer -->
     <footer id="footer" class="page-footer font-small teal pt-4 bg-dark navbar-fixed-bottom ">
 
