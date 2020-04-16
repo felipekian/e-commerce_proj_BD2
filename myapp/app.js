@@ -31,11 +31,6 @@ io.on('connection', (socket) => {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-
-
-
-
-
 app.use(session({
     secret: 'FelipeZettaByte',
     resave: false,
@@ -49,6 +44,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, '/')));
 app.use(expressvalidator());
+
 app.use(session({
     secret: 'ZetTaBytEInFo',
     resave: false,

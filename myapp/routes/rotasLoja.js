@@ -18,18 +18,14 @@ router.get('/', function(req, res, next) {
         dbo.collection("produtos").find({}).toArray(function(err, result) {
             if (err) throw err;
             
-            produt = result;
-            console.log("PRODUTOS: "+produt[0])
-
             if ( req.session["usuario"] )
             {
                 res.render('./loja_clientes/index',{msg:req.session["usuario"], produtos:produt, sinal:0});
             }
             else
             {
-                res.render('./loja_clientes/index', {msg:"", produtos:produt, sinal:0});
+                res.render('./loja_clientes/index', {msg:"", produtos:result, sinal:0});
             }
-
             db.close();
         });
     });

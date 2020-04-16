@@ -1,186 +1,203 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-  <head>
+<head>
 
-    <!-- Titulo da loja -->
-    <title> Zetta-Byte Shopping - Login</title>
+  <!-- Titulo da loja -->
+  <title> Zetta-Byte Shopping - Login</title>
 
-    <!-- configurações de linguagem -->
-    <meta http-equiv="Content-Language" content="pt-br">
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <!-- configurações de linguagem -->
+  <meta http-equiv="Content-Language" content="pt-br">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
-    <!-- icone do titulo -->
-    <link rel="icon" type="imagem/png" href="/images/animated_favicon1.gif" />
+  <!-- icone do titulo -->
+  <link rel="icon" type="imagem/png" href="/images/animated_favicon1.gif" />
 
-    <!-- JQuery, popper e bootstrap JS -->
-    <script src="/javascripts/jquery.js"></script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    
-    <script src="/stylesheets/bootstrap.min.css"></script>
-    
+  <!-- JQuery, popper e bootstrap JS -->
+  <script src="/javascripts/jquery.js"></script>
 
-    <!-- CSS Externo e boostrap-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
 
-    <!-- Fonte do google fonts - Roboto -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    
-  </head>
-  
-  <body>
-    <header>
-        <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
-            
-          <a class="navbar-brand" href="/"><img src="/images/bootstrap-solid.svg" width="30" height="30" alt=""> Zetta-Byte</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          
-          <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="/">Home </a>
-              </li>              
-              <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Produtos
-                  </a>
-                  <!-- Aqui adiciona as lista de produtos  -->
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Gabinetes</a>
-                    <a class="dropdown-item" href="#">Monitores</a>
-                    <a class="dropdown-item" href="#">Mouses</a>
-                    <a class="dropdown-item" href="#">Teclados</a>
-                    <a class="dropdown-item" href="#">HDs e SSDs</a>
-                    <a class="dropdown-item" href="#">Processadores</a>
-                    <a class="dropdown-item" href="#">Placas mãe</a>
-                    <a class="dropdown-item" href="#">Placas de vídeo</a>
-                    <a class="dropdown-item" href="#">Headsets</a>
-                  </div>
-                  <!-- fim da lista -->
-                </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/comparar_produtos">Comparar</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="/carrinho">Carrinho</a>
-              </li>
-              <li class="nav-item">
-                    <% if(msg != "" && msg != "Cadastrado com sucesso, agora faça seu login.") {%>
-                        <a class="nav-link text-success" href="/logout">Logout - <%= msg %></a>
-                    <% } else {%>
-                        <a class="nav-link" href="/login">Login</a>
-                    <% } %>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-            </form>
-          </div>
-      </nav>
-    </header>
-    <main>
+  <script src="/stylesheets/bootstrap.min.css"></script>
 
-        <div class="container col-sm-1  col-md-2 col-lg-3 col-xs-4"></div>
-        
-        <div class="container col-sm-10  col-md-8 col-lg-6 col-xs-4">
-            
-            
-            
-            <form action="/validarUsuario" method="post">
-                <br>
-                <h1 class="centro">Login</h1>
-                <br>
-                <% if(msg == "Dados não conferem, tente de novo!" || msg =="Erro de validação:") {%>
-                   
-                    <h3 class="centro text-danger"><%= msg %></h3>
-                <% } else {%>
-                    
-                    <h3 class="centro text-success"><%= msg %></h3>
-                <% } %>
-    
-                <% if(erros){ %>                
-                    <div class="container">
-                        <ul class="list-group ">
-                        <% for(let i=0 ; i<erros.length; i++){ %>
-                            <li class="text_danger list-group-item list-group-item-action list-group-item-danger"><%= erros[i].msg %></li>
-                        <% } %>
-                        </ul>
-                    </div>                
-                <% } %>
-                <br>
-                <div class="form-group">
-                    <label for="usuario">usuário</label>
-                    <input type="text" name="usuario" id="usuario" class="form-control" value="<%= dados.usuario %>" required autofocus>
-                </div>
-                <div class="form-group">
-                    <label for="senha">Senha</label>
-                    <input type="password" name="senha" id="senha" class="form-control" value="<%= dados.senha %>" required>
-                </div> 
-                <br>       
-                <div class="form-group">
-                    <input type="submit" value="Logar" class="btn btn-primary">
-                </div>
 
-                <br>
+  <!-- CSS Externo e boostrap-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
 
-                <div class="form-group">
-                    <div>
-                        <p>Não tenho conta: <a href="/cadastrar_cliente">Cadastrar</a></p> 
-                    </div>
-                    <div>
-                        <p>Esqueci minha senha: <a href="/recuperar_login_cliente">Recuperar</a></p>
-                    </div>
-                </div>
-            </form>
-    
+  <!-- Fonte do google fonts - Roboto -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+  <style>
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+
+      <a class="navbar-brand" href="/"><img src="/images/bootstrap-solid.svg" width="30" height="30" alt="">
+        Zetta-Byte</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
+        aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Produtos
+            </a>
+            <!-- Aqui adiciona as lista de produtos  -->
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Gabinetes</a>
+              <a class="dropdown-item" href="#">Monitores</a>
+              <a class="dropdown-item" href="#">Mouses</a>
+              <a class="dropdown-item" href="#">Teclados</a>
+              <a class="dropdown-item" href="#">HDs e SSDs</a>
+              <a class="dropdown-item" href="#">Processadores</a>
+              <a class="dropdown-item" href="#">Placas mãe</a>
+              <a class="dropdown-item" href="#">Placas de vídeo</a>
+              <a class="dropdown-item" href="#">Headsets</a>
+            </div>
+            <!-- fim da lista -->
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/comparar_produtos">Comparar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/carrinho">Carrinho</a>
+          </li>
+          <li class="nav-item">
+            <% if(msg != "" && msg != "Cadastrado com sucesso, agora faça seu login.") {%>
+            <a class="nav-link text-success" href="/logout">Logout - <%= msg %></a>
+            <% } else {%>
+            <a class="nav-link" href="/login">Login</a>
+            <% } %>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+        </form>
+      </div>
+    </nav>
+  </header>
+  <main>
+
+    <div class="container col-sm-1  col-md-2 col-lg-3 col-xs-4"></div>
+
+    <div class="container col-sm-10  col-md-8 col-lg-6 col-xs-4">
+
+
+
+      <form action="/validarUsuario" method="post">
+        <br>
+        <h1 class="centro">Login</h1>
+        <br>
+        <% if(msg == "Dados não conferem, tente de novo!" || msg =="Erro de validação:") {%>
+
+        <h3 class="centro text-danger"><%= msg %></h3>
+        <% } else {%>
+
+        <h3 class="centro text-success"><%= msg %></h3>
+        <% } %>
+
+        <% if(erros){ %>
+        <div class="container">
+          <ul class="list-group ">
+            <% for(let i=0 ; i<erros.length; i++){ %>
+            <li class="text_danger list-group-item list-group-item-action list-group-item-danger"><%= erros[i].msg %>
+            </li>
+            <% } %>
+          </ul>
         </div>
-        <div class="container col-sm-1  col-md-2 col-lg-3 col-xs-4"></div>
+        <% } %>
+        <br>
+        <div class="form-group">
+          <label for="usuario">usuário</label>
+          <input type="text" name="usuario" id="usuario" class="form-control" value="<%= dados.usuario %>" required
+            autofocus>
+        </div>
+        <div class="form-group">
+          <label for="senha">Senha</label>
+          <input type="password" name="senha" id="senha" class="form-control" value="<%= dados.senha %>" required>
+        </div>
+        <br>
+        <div class="form-group">
+          <input type="submit" value="Logar" class="btn btn-primary">
+        </div>
+
         <br>
 
-    </main>
-    <!-- Footer -->
-    <footer class="page-footer font-small teal pt-4 bg-dark">
-
-        <!-- Footer Text -->
-        <div class="container-fluid text-center text-md-left">
-      
-          <!-- Grid row -->
-          <div class="row">
-      
-            <!-- Grid column -->
-            <div class="col-md-6 mt-md-0 mt-3">
-      
-              <!-- Content -->
-              <h5 class="text-uppercase font-weight-bold white">Qualidade</h5>
-              <p class="white">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-      
-            </div>
-            <!-- Grid column -->
-      
-            <hr class="clearfix w-100 d-md-none pb-3">
-      
-            <!-- Grid column -->
-            <div class="col-md-6 mb-md-0 mb-3">
-      
-              <!-- Content -->
-              <h5 class="text-uppercase font-weight-bold white">Satisfação</h5>
-              <p class="white">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-      
-            </div>
-            <!-- Grid column -->
-      
+        <div class="form-group">
+          <div>
+            <p>Não tenho conta: <a href="/cadastrar_cliente">Cadastrar</a></p>
           </div>
-          <!-- Grid row -->
-      
+          <div>
+            <p>Esqueci minha senha: <a href="/recuperar_login_cliente">Recuperar</a></p>
+          </div>
         </div>
-        
-      
-      </footer>
-      <!-- Footer -->
-  </body>
+      </form>
+
+    </div>
+    <div class="container col-sm-1  col-md-2 col-lg-3 col-xs-4"></div>
+    <br>
+
+  </main>
+  <!-- Footer -->
+  <footer class="page-footer font-small teal pt-4 bg-dark footer">
+
+    <!-- Footer Text -->
+    <div class="container-fluid text-center text-md-left">
+
+      <!-- Grid row -->
+      <div class="row">
+
+        <!-- Grid column -->
+        <div class="col-md-6 mt-md-0 mt-3">
+
+          <!-- Content -->
+          <h5 class="text-uppercase font-weight-bold white">Qualidade</h5>
+          <p class="white">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+
+        </div>
+        <!-- Grid column -->
+
+        <hr class="clearfix w-100 d-md-none pb-3">
+
+        <!-- Grid column -->
+        <div class="col-md-6 mb-md-0 mb-3">
+
+          <!-- Content -->
+          <h5 class="text-uppercase font-weight-bold white">Satisfação</h5>
+          <p class="white">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+
+
+  </footer>
+  <!-- Footer -->
+</body>
+
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-  <head>
+<head>
 
     <!-- Titulo da loja -->
     <title> Zetta-Byte Shopping - Home </title>
@@ -16,122 +16,132 @@
     <!-- JQuery, popper e bootstrap JS -->
     <script src="/javascripts/jquery.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
 
     <!-- CSS Externo e boostrap-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
     <link rel='stylesheet' href='/stylesheets/style.css' />
 
     <!-- Fonte do google fonts - Roboto -->
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 
     <style>
-        footer{
-            margin-top: 60px;
-            margin-bottom: -300px;
-        }
-
-        .aumentaP{
+        .aumentaP {
             padding-top: 10px;
             padding-bottom: 10px;
             font-size: 1.3em;
         }
 
-        .aumentaQ{
+        .aumentaQ {
             padding-top: 10px;
             padding-bottom: 10px;
         }
-        
-        .largura{
+
+        .largura {
             width: 65px;
         }
 
-        .imgConfig{
+        .imgConfig {
             max-width: 300px;
             max-height: 300px;
         }
 
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    
+
     </style>
 
-    
-  </head>
-  
-  <body>
+
+</head>
+
+<body>
     <header>
         <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
-            
-          <a class="navbar-brand" href="/"><img src="/images/bootstrap-solid.svg" width="30" height="30" alt=""> Zetta-Byte</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          
-          <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(página atual)</span></a>
-              </li>              
-              <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Produtos
-                  </a>
-                  <!-- Aqui adiciona as lista de produtos  -->
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/produto/gabinete">Gabinetes</a>
-                    <a class="dropdown-item" href="/produto/cooler">Coolers</a>
-                    <a class="dropdown-item" href="/produto/monitor">Monitores</a>
-                    <a class="dropdown-item" href="/produto/mouse">Mouses</a>
-                    <a class="dropdown-item" href="/produto/teclado">Teclados</a>
-                    <a class="dropdown-item" href="/produto/hd">HDs</a>
-                    <a class="dropdown-item" href="/produto/ssd">SSDs</a>
-                    <a class="dropdown-item" href="/produto/processador">Processadores</a>
-                    <a class="dropdown-item" href="/produto/Memoria ">Memória</a>
-                    <a class="dropdown-item" href="/produto/placamae">Placas mãe</a>
-                    <a class="dropdown-item" href="/produto/placavideo">Placas de vídeo</a>
-                    <a class="dropdown-item" href="/produto/headset">Headsets</a>
-                  </div>
-                  <!-- fim da lista -->
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/comparar_produtos">Comparar</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/carrinho">Carrinho</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/minhascompras">Minhas Compras</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/chat">Chat</a>
-                </li>
-                <li class="nav-item">
-                    <% if(msg != "") {%>
+
+            <a class="navbar-brand" href="/"><img src="/images/bootstrap-solid.svg" width="30" height="30" alt="">
+                Zetta-Byte</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
+                aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(página atual)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Produtos
+                        </a>
+                        <!-- Aqui adiciona as lista de produtos  -->
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/produto/gabinete">Gabinetes</a>
+                            <a class="dropdown-item" href="/produto/cooler">Coolers</a>
+                            <a class="dropdown-item" href="/produto/monitor">Monitores</a>
+                            <a class="dropdown-item" href="/produto/mouse">Mouses</a>
+                            <a class="dropdown-item" href="/produto/teclado">Teclados</a>
+                            <a class="dropdown-item" href="/produto/hd">HDs</a>
+                            <a class="dropdown-item" href="/produto/ssd">SSDs</a>
+                            <a class="dropdown-item" href="/produto/processador">Processadores</a>
+                            <a class="dropdown-item" href="/produto/Memoria ">Memória</a>
+                            <a class="dropdown-item" href="/produto/placamae">Placas mãe</a>
+                            <a class="dropdown-item" href="/produto/placavideo">Placas de vídeo</a>
+                            <a class="dropdown-item" href="/produto/headset">Headsets</a>
+                        </div>
+                        <!-- fim da lista -->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/comparar_produtos">Comparar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/carrinho">Carrinho</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/minhascompras">Minhas Compras</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/chat">Chat</a>
+                    </li>
+                    <li class="nav-item">
+                        <% if(msg != "") {%>
                         <a class="nav-link text-success" href="/logout">Logout - <%= msg %></a>
-                    <% } else {%>
+                        <% } else {%>
                         <a class="nav-link" href="/login">Login</a>
-                    <% } %>
-                </li>
-            </ul>
-            
-          </div>
-      </nav>
+                        <% } %>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
     </header>
     <main>
-        
+
         <br>
         <h2 class="centro"> Produtos </h2>
         <br>
 
-        
+
 
         <% if(produtos[0] != undefined && sinal == 0 ){ %>
-            <div class="row">
+        <div class="row">
             <div class="container col-sm-2 col-md-2 col-lg-3 col-xl-3"></div>
-            <div class="container col-sm-8 col-md-8 col-lg-6 col-xl-6" > 
-                
+            <div class="container col-sm-8 col-md-8 col-lg-6 col-xl-6">
+
                 <h4 class="alert alert-success centro mensagemInsercao"></h4>
                 <br>
 
@@ -139,43 +149,53 @@
                     <div class="carousel-inner">
                         <% ok = 1 %>
                         <% produtos.forEach(function(dado){ %>
-                            <% if(ok){ %>
-                                <div class="carousel-item active">
-                                    <img class="d-block w-100 imgcarrossel" src='<%= dado.img %>' >
+                        <% if(ok){ %>
+                        <div class="carousel-item active">
+                            <img class="d-block w-100 imgcarrossel" src='<%= dado.img %>'>
 
-                                    <h3 class="caption centro"> <%= dado.nomeproduto %> </h3>
-                                    
-                                    <!--
+                            <h3 class="caption centro"> <%= dado.nomeproduto %> </h3>
+
+                            <!--
                                         <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><a href="/salvarcarrinho/<%=dado._id%>" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></a></p>
                                     -->
-                                    <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></button> <a class="centro btn btn-primary" href="/detalheproduto/<%= dado._id %>">Detalhe</a></p>
-                                    
-                                    
-                                        
-                                </div>
-                                
-                                <% ok = 0 %>
-                            <% } else { %>
-                                <div class="carousel-item">
-                                        <img class="d-block w-100 imgcarrossel" src='<%= dado.img %>' >
+                            <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$
+                                    <%= dado.preco %>,00 </span><button onclick="adicionarNoCarrinho('<%=dado._id%>')"
+                                    class="btn btn-md btn-success"> <img src="/images/shopping-cart.png"></button> <a
+                                    class="centro btn btn-primary" href="/detalheproduto/<%= dado._id %>">Detalhe</a>
+                            </p>
 
-                                    <h3 class="caption centro"> <%= dado.nomeproduto %> </h3>
-                                    <!--
+
+
+                        </div>
+
+                        <% ok = 0 %>
+                        <% } else { %>
+                        <div class="carousel-item">
+                            <img class="d-block w-100 imgcarrossel" src='<%= dado.img %>'>
+
+                            <h3 class="caption centro"> <%= dado.nomeproduto %> </h3>
+                            <!--
                                     <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><a href="/salvarcarrinho/<%=dado._id%>" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></a></p>
                                     -->
-                                    
-                                    <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></button> <a class="centro btn btn-primary" href="/detalheproduto/<%= dado._id %>">Detalhe</a></p>
-                                </div>
-                                
-                            <% } %>
+
+                            <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$
+                                    <%= dado.preco %>,00 </span><button onclick="adicionarNoCarrinho('<%=dado._id%>')"
+                                    class="btn btn-md btn-success"> <img src="/images/shopping-cart.png"></button> <a
+                                    class="centro btn btn-primary" href="/detalheproduto/<%= dado._id %>">Detalhe</a>
+                            </p>
+                        </div>
+
+                        <% } %>
                         <% }) %>
-                        
+
                     </div>
-                    <a class="carousel-control-prev direcao" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <a class="carousel-control-prev direcao" href="#carouselExampleControls" role="button"
+                        data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Anterior</span>
                     </a>
-                    <a class="carousel-control-next direcao" href="#carouselExampleControls" role="button" data-slide="next">
+                    <a class="carousel-control-next direcao" href="#carouselExampleControls" role="button"
+                        data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Próximo</span>
                     </a>
@@ -190,39 +210,35 @@
             <!-- Colocar o restante dos produtos com esse template -->
             <% totalProdutos = 12 %>
             <% var valores = [] %>
-            <%for (let i=0; i<totalProdutos ; i++){ %>
-                <% while(true){ %>
-                    <% let valor = Math.floor(Math.random() * 44) %>
-                    <% if(!(valor in valores)){ %>
-                        <% valores.push(valor) %>
-                        <% break %>
-                    <% } %>
-                <% } %>
-            <% } %>
 
             <% for(let i=0 ; i<totalProdutos ; i++){ %>
-                <% let produto = [] %>
-                <% produto.push(produtos[valores[i]]) %>
-                <% produto.forEach(function(dado){ %>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                        <img class="card-img-top imgConfig" src="<%= dado.img %>" alt="">
-                        <div class="card-body">
-                            <h4 class="card-title">
-                            <p ><%= dado.nomeproduto %></p>
-                            </h4>
-                            <p class="card-text"><%= dado.descricao %></p>
-                            <h3><span class="badge badge-secondary aumentaQ"> R$ <%=dado.preco %>,00 </span><div class="btn btn-group"><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></button> <a class="centro btn btn-primary" href="/detalheproduto/<%= dado._id %>">Detalhe</a></div></h3>
+            <% //let produto = [] %>
+            <% //produto.push(produtos[valores[i]]) %>
+            <% produtos.forEach(function(dado){ %>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top imgConfig" src="<%= dado.img %>" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <p><%= dado.nomeproduto %></p>
+                        </h4>
+                        <p class="card-text"><%= dado.descricao %></p>
+                        <h3><span class="badge badge-secondary aumentaQ"> R$ <%=dado.preco %>,00 </span>
+                            <div class="btn btn-group"><button onclick="adicionarNoCarrinho('<%=dado._id%>')"
+                                    class="btn btn-md btn-success"> <img src="/images/shopping-cart.png"></button> <a
+                                    class="centro btn btn-primary" href="/detalheproduto/<%= dado._id %>">Detalhe</a>
+                            </div>
+                        </h3>
 
-                            
-                            
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9733;</small>
-                        </div>
-                        </div>
+
+
                     </div>
-                <% }) %>
+                    <div class="card-footer">
+                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9733;</small>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
             <% } %>
         </div>
 
@@ -234,42 +250,45 @@
 
 
         <% } else if(produtos[0] != undefined && sinal == 1) { %>
-            <div class="row">
-                <div class="containercol-sm-2 col-md-2 col-lg-3 col-xl-3"></div>
-                <div class="containercol-sm-8 col-md-8 col-lg-6 col-xl-6">
-                    <!--ADD AQUI A MENSAGEM-->
-                    <h4 class="alert alert-success centro mensagemInsercao"></h4>
-                    <br>
-                </div>
-            
-                <div class="containercol-sm-2 col-md-2 col-lg-3 col-xl-3"></div>
+        <div class="row">
+            <div class="containercol-sm-2 col-md-2 col-lg-3 col-xl-3"></div>
+            <div class="containercol-sm-8 col-md-8 col-lg-6 col-xl-6">
+                <!--ADD AQUI A MENSAGEM-->
+                <h4 class="alert alert-success centro mensagemInsercao"></h4>
+                <br>
             </div>
-            <table class="table table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th></th>
-                            <th>PRODUTO</th>
-                            <th>MARCA</th>
-                            <th>DESCRIÇÃO</th>
-                            <th>VALOR</th>
-                            <th>ESTOQUE</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
 
-            <% produtos.forEach(function(dado){ %>
-                
+            <div class="containercol-sm-2 col-md-2 col-lg-3 col-xl-3"></div>
+        </div>
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th></th>
+                    <th>PRODUTO</th>
+                    <th>MARCA</th>
+                    <th>DESCRIÇÃO</th>
+                    <th>VALOR</th>
+                    <th>ESTOQUE</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <% produtos.forEach(function(dado){ %>
+
                 <tr>
                     <td><img src='<%= "/"+ dado.img %>' class="fototabela"></td>
                     <td><%= dado.nomeproduto %></td>
                     <td><%= dado.fabricante %></td>
                     <td><%= dado.descricao%></td>
                     <td><span class=" badge badge-secondary aumentaP">R$ <%= dado.preco%>,00</span></td>
-                    <td><span title="quantidade em estoque." class=" badge badge-secondary aumentaP largura"> <%= dado.quantidade %></span></td>
-                    
-                    <td><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success tamanhoBotao"> <img src="/images/shopping-cart.png" title="Adicionar produto no carrinho."> </button> </td>
+                    <td><span title="quantidade em estoque." class=" badge badge-secondary aumentaP largura">
+                            <%= dado.quantidade %></span></td>
+
+                    <td><button onclick="adicionarNoCarrinho('<%=dado._id%>')"
+                            class="btn btn-md btn-success tamanhoBotao"> <img src="/images/shopping-cart.png"
+                                title="Adicionar produto no carrinho."> </button> </td>
                     <td><a class="centro btn btn-primary" href="/detalheproduto/<%= dado._id %>">Detalhe</a></td>
                 </tr>
 
@@ -277,71 +296,71 @@
                     <p class="money centro "> <span class="badge badge-secondary aumentaQ"> R$  <%= dado.preco %>,00 </span><button onclick="adicionarNoCarrinho('<%=dado._id%>')" class="btn btn-md btn-success" > <img src="/images/shopping-cart.png"></button></p>
                 -->
 
-            <% }) %>
+                <% }) %>
             </tbody>
         </table>
         <% } %>
     </main>
-    
-    <!-- Footer -->
-    <footer  class="page-footer font-small teal pt-4 bg-dark">
 
-            <!-- Footer Text -->
-            <div class="container-fluid text-center text-md-left">
-            
-                <!-- Grid row -->
-                <div class="row">
-            
+    <!-- Footer -->
+    <footer class="page-footer font-small teal pt-4 bg-dark footer">
+
+        <!-- Footer Text -->
+        <div class="container-fluid text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
                 <!-- Grid column -->
                 <div class="col-md-6 mt-md-0 mt-3">
-            
+
                     <!-- Content -->
                     <h5 class="text-uppercase font-weight-bold white">Qualidade</h5>
                     <p class="white">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-            
+
                 </div>
                 <!-- Grid column -->
-            
+
                 <hr class="clearfix w-100 d-md-none pb-3">
-            
+
                 <!-- Grid column -->
                 <div class="col-md-6 mb-md-0 mb-3">
-            
+
                     <!-- Content -->
                     <h5 class="text-uppercase font-weight-bold white">Satisfação</h5>
                     <p class="white">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-            
+
                 </div>
                 <!-- Grid column -->
-            
-                </div>
-                <!-- Grid row -->
-            
+
             </div>
-            <!-- Footer Text -->
-        </footer>
-    </body>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Text -->
+    </footer>
+</body>
 
 
-    <script>
-        
-        $(document).ready(function(){
-            $('.mensagemInsercao').hide()
+<script>
+
+    $(document).ready(function () {
+        $('.mensagemInsercao').hide()
+    })
+
+    function adicionarNoCarrinho(produto) {
+
+        $.ajax({
+            method: "GET",
+            url: "/salvarcarrinho/" + produto
+        }).done(function (resp) {
+            $('.mensagemInsercao').show()
+            $('.mensagemInsercao').html("Produto inserido no Carrinho!");
+            setInterval(function () { $('.mensagemInsercao').hide(); }, 3000);
         })
-        
-        function adicionarNoCarrinho(produto){
+    }
 
-            $.ajax({
-                method:"GET",
-                url: "/salvarcarrinho/"+produto
-            }).done( function ( resp ) {
-                $('.mensagemInsercao').show()
-                $('.mensagemInsercao').html("Produto inserido no Carrinho!");
-                setInterval(function(){ $('.mensagemInsercao').hide(); }, 3000);
-            })
-        }
-    
-    </script>
+</script>
 
 
 </html>
