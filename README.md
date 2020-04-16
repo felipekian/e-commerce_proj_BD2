@@ -2,6 +2,8 @@
 
 # PROJETO E-COMMERCE
 
+Projeto desenvolvido para a disciplina de **Banco de Dados II** - Sistema Poliglota (2 bancos de dados na mesma aplicação)
+
 O sistema desenvolvido conta com duas frentes:
 
 * **LADO ADMINISTRATIVO:**
